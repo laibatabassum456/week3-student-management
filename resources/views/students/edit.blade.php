@@ -1,88 +1,432 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Edit Student</title>
 
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+<title>Edit Student | Student Management</title>
+
+@vite(['resources/css/app.css', 'resources/js/app.js'])
+
+<style>
+    body {
+        background: #f5f7fb;
+        font-family: Arial, Helvetica, sans-serif;
+        color: #172033;
+    }
+
+    .page-wrapper {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 40px 24px;
+    }
+
+    .top-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 28px;
+    }
+
+    .brand {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .brand-logo {
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        background: #1e3a8a;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 17px;
+    }
+
+    .brand-title {
+        font-size: 18px;
+        font-weight: 700;
+    }
+
+    .brand-subtitle {
+        font-size: 12px;
+        color: #7b8497;
+        margin-top: 2px;
+    }
+
+    .back-link {
+        color: #475569;
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+    }
+
+    .back-link:hover {
+        color: #1e3a8a;
+    }
+
+    .header-card {
+        background: linear-gradient(135deg, #1e3a8a, #2563eb);
+        border-radius: 18px;
+        padding: 30px;
+        color: white;
+        margin-bottom: 22px;
+        box-shadow: 0 10px 30px rgba(30, 58, 138, 0.16);
+    }
+
+    .header-card h1 {
+        margin: 0;
+        font-size: 28px;
+        font-weight: 700;
+    }
+
+    .header-card p {
+        margin: 8px 0 0;
+        color: #dbeafe;
+        font-size: 14px;
+    }
+
+    .form-card {
+        background: white;
+        border: 1px solid #e5e7eb;
+        border-radius: 18px;
+        padding: 32px;
+        box-shadow: 0 8px 25px rgba(15, 23, 42, 0.06);
+    }
+
+    .section-title {
+        font-size: 17px;
+        font-weight: 700;
+        margin-bottom: 22px;
+        color: #172033;
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 22px;
+    }
+
+    .full-width {
+        grid-column: 1 / -1;
+    }
+
+    .field label {
+        display: block;
+        font-size: 13px;
+        font-weight: 700;
+        color: #374151;
+        margin-bottom: 8px;
+    }
+
+    .field input,
+    .field select {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 12px 14px;
+        border: 1px solid #d8dee9;
+        border-radius: 10px;
+        background: #fff;
+        color: #172033;
+        font-size: 14px;
+        outline: none;
+        transition: 0.2s;
+    }
+
+    .field input:focus,
+    .field select:focus {
+        border-color: #2563eb;
+        box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.10);
+    }
+
+    .field-help {
+        font-size: 12px;
+        color: #7b8497;
+        margin-top: 7px;
+    }
+
+    .error-box {
+        background: #fff1f2;
+        border: 1px solid #fecdd3;
+        color: #be123c;
+        border-radius: 12px;
+        padding: 15px 18px;
+        margin-bottom: 24px;
+        font-size: 13px;
+    }
+
+    .error-box strong {
+        display: block;
+        margin-bottom: 7px;
+    }
+
+    .error-box ul {
+        margin: 0;
+        padding-left: 20px;
+    }
+
+    .field-error {
+        color: #dc2626;
+        font-size: 12px;
+        margin-top: 6px;
+    }
+
+    .current-profile {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        padding: 18px;
+        background: #f8fafc;
+        border: 1px solid #e5e7eb;
+        border-radius: 12px;
+        margin-bottom: 24px;
+    }
+
+    .profile-image {
+        width: 82px;
+        height: 82px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid white;
+        box-shadow: 0 3px 12px rgba(15, 23, 42, 0.12);
+    }
+
+    .profile-placeholder {
+        width: 82px;
+        height: 82px;
+        border-radius: 50%;
+        background: #dbeafe;
+        color: #1e3a8a;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 26px;
+        font-weight: 700;
+    }
+
+    .profile-label {
+        font-size: 12px;
+        color: #7b8497;
+        margin-bottom: 4px;
+    }
+
+    .profile-name {
+        font-size: 17px;
+        font-weight: 700;
+        color: #172033;
+    }
+
+    .image-upload {
+        border: 1px dashed #cbd5e1;
+        border-radius: 12px;
+        padding: 18px;
+        background: #f8fafc;
+    }
+
+    .image-upload input {
+        background: white;
+    }
+
+    .actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 12px;
+        margin-top: 30px;
+        padding-top: 24px;
+        border-top: 1px solid #edf0f4;
+    }
+
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 11px 20px;
+        border-radius: 9px;
+        text-decoration: none;
+        border: none;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    .btn-primary {
+        background: #1e3a8a;
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background: #172554;
+    }
+
+    .btn-secondary {
+        background: #f1f5f9;
+        color: #475569;
+    }
+
+    .btn-secondary:hover {
+        background: #e2e8f0;
+    }
+
+    .required {
+        color: #dc2626;
+    }
+
+    @media (max-width: 700px) {
+        .page-wrapper {
+            padding: 25px 16px;
+        }
+
+        .top-bar {
+            align-items: flex-start;
+        }
+
+        .form-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .full-width {
+            grid-column: auto;
+        }
+
+        .form-card {
+            padding: 22px;
+        }
+
+        .header-card {
+            padding: 24px;
+        }
+
+        .current-profile {
+            align-items: flex-start;
+        }
+
+        .actions {
+            flex-direction: column-reverse;
+        }
+
+        .btn {
+            width: 100%;
+        }
+    }
+</style>
+```
+
 </head>
 
-<body class="bg-gray-100">
+<body>
 
-<div class="max-w-2xl mx-auto py-10 px-4">
+<div class="page-wrapper">
 
-    <div class="bg-white shadow-md rounded-lg p-8">
 
-        <div class="flex items-center justify-between mb-6">
+<!-- Top Navigation -->
+<div class="top-bar">
 
-            <h1 class="text-2xl font-bold text-gray-800">
-                Edit Student
-            </h1>
+    <div class="brand">
+        <div class="brand-logo">SM</div>
 
-            <a
-                href="{{ route('students.show', $student) }}"
-                class="text-blue-600 hover:text-blue-800"
+        <div>
+            <div class="brand-title">Student Management</div>
+            <div class="brand-subtitle">Administration Portal</div>
+        </div>
+    </div>
+
+    <a
+        href="{{ route('students.show', $student) }}"
+        class="back-link"
+    >
+        ← Back to Profile
+    </a>
+
+</div>
+
+<!-- Page Header -->
+<div class="header-card">
+
+    <h1>Edit Student</h1>
+
+    <p>
+        Update student information, course assignment or profile image.
+    </p>
+
+</div>
+
+<!-- Form Card -->
+<div class="form-card">
+
+    <div class="section-title">
+        Student Information
+    </div>
+
+    {{-- Validation Errors --}}
+    @if ($errors->any())
+        <div class="error-box">
+
+            <strong>Please fix the following errors:</strong>
+
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+
+        </div>
+    @endif
+
+    {{-- Current Profile --}}
+    <div class="current-profile">
+
+        @if ($student->image)
+
+            <img
+                src="{{ asset('storage/' . $student->image) }}"
+                alt="{{ $student->name }}"
+                class="profile-image"
             >
-                ← Back to Profile
-            </a>
+
+        @else
+
+            <div class="profile-placeholder">
+                {{ strtoupper(substr($student->name, 0, 1)) }}
+            </div>
+
+        @endif
+
+        <div>
+
+            <div class="profile-label">
+                Current Student
+            </div>
+
+            <div class="profile-name">
+                {{ $student->name }}
+            </div>
 
         </div>
 
-        {{-- Validation Errors --}}
-        @if ($errors->any())
-            <div class="mb-6 bg-red-100 border border-red-300 text-red-700 px-4 py-3 rounded">
+    </div>
 
-                <strong>Please fix the following errors:</strong>
+    <form
+        action="{{ route('students.update', $student) }}"
+        method="POST"
+        enctype="multipart/form-data"
+    >
 
-                <ul class="mt-2 list-disc list-inside">
+        @csrf
+        @method('PUT')
 
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
+        <div class="form-grid">
 
-                </ul>
+            <!-- Name -->
+            <div class="field">
 
-            </div>
-        @endif
-
-        <form
-            action="{{ route('students.update', $student) }}"
-            method="POST"
-            enctype="multipart/form-data"
-        >
-
-            @csrf
-            @method('PUT')
-
-            {{-- Current Image --}}
-            @if ($student->image)
-
-                <div class="mb-6">
-
-                    <p class="font-medium text-gray-700 mb-2">
-                        Current Profile Image
-                    </p>
-
-                    <img
-                        src="{{ asset('storage/' . $student->image) }}"
-                        alt="{{ $student->name }}"
-                        class="w-24 h-24 rounded-full object-cover border"
-                    >
-
-                </div>
-
-            @endif
-
-            {{-- Name --}}
-            <div class="mb-5">
-
-                <label
-                    for="name"
-                    class="block font-medium text-gray-700 mb-2"
-                >
-                    Name
+                <label for="name">
+                    Full Name <span class="required">*</span>
                 </label>
 
                 <input
@@ -91,25 +435,21 @@
                     name="name"
                     value="{{ old('name', $student->name) }}"
                     required
-                    class="w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 >
 
                 @error('name')
-                    <p class="text-red-600 text-sm mt-1">
+                    <div class="field-error">
                         {{ $message }}
-                    </p>
+                    </div>
                 @enderror
 
             </div>
 
-            {{-- Email --}}
-            <div class="mb-5">
+            <!-- Email -->
+            <div class="field">
 
-                <label
-                    for="email"
-                    class="block font-medium text-gray-700 mb-2"
-                >
-                    Email
+                <label for="email">
+                    Email Address <span class="required">*</span>
                 </label>
 
                 <input
@@ -118,25 +458,21 @@
                     name="email"
                     value="{{ old('email', $student->email) }}"
                     required
-                    class="w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 >
 
                 @error('email')
-                    <p class="text-red-600 text-sm mt-1">
+                    <div class="field-error">
                         {{ $message }}
-                    </p>
+                    </div>
                 @enderror
 
             </div>
 
-            {{-- Phone --}}
-            <div class="mb-5">
+            <!-- Phone -->
+            <div class="field">
 
-                <label
-                    for="phone"
-                    class="block font-medium text-gray-700 mb-2"
-                >
-                    Phone
+                <label for="phone">
+                    Phone Number <span class="required">*</span>
                 </label>
 
                 <input
@@ -145,32 +481,27 @@
                     name="phone"
                     value="{{ old('phone', $student->phone) }}"
                     required
-                    class="w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 >
 
                 @error('phone')
-                    <p class="text-red-600 text-sm mt-1">
+                    <div class="field-error">
                         {{ $message }}
-                    </p>
+                    </div>
                 @enderror
 
             </div>
 
-            {{-- Course --}}
-            <div class="mb-5">
+            <!-- Course -->
+            <div class="field">
 
-                <label
-                    for="course_id"
-                    class="block font-medium text-gray-700 mb-2"
-                >
-                    Course
+                <label for="course_id">
+                    Course <span class="required">*</span>
                 </label>
 
                 <select
                     id="course_id"
                     name="course_id"
                     required
-                    class="w-full border-gray-300 rounded-md shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 >
 
                     @foreach ($courses as $course)
@@ -187,65 +518,69 @@
                 </select>
 
                 @error('course_id')
-                    <p class="text-red-600 text-sm mt-1">
+                    <div class="field-error">
                         {{ $message }}
-                    </p>
+                    </div>
                 @enderror
 
             </div>
 
-            {{-- New Image --}}
-            <div class="mb-6">
+            <!-- New Image -->
+            <div class="field full-width">
 
-                <label
-                    for="image"
-                    class="block font-medium text-gray-700 mb-2"
-                >
+                <label for="image">
                     Change Profile Image
                 </label>
 
-                <input
-                    type="file"
-                    id="image"
-                    name="image"
-                    accept=".jpg,.jpeg,.png,.webp"
-                    class="w-full border border-gray-300 rounded-md p-2"
-                >
+                <div class="image-upload">
 
-                <p class="text-sm text-gray-500 mt-1">
-                    JPG, JPEG, PNG or WEBP. Maximum size: 2MB.
-                </p>
+                    <input
+                        type="file"
+                        id="image"
+                        name="image"
+                        accept=".jpg,.jpeg,.png,.webp"
+                    >
+
+                    <div class="field-help">
+                        Leave empty to keep the current image.
+                        JPG, JPEG, PNG or WEBP. Maximum size: 2MB.
+                    </div>
+
+                </div>
 
                 @error('image')
-                    <p class="text-red-600 text-sm mt-1">
+                    <div class="field-error">
                         {{ $message }}
-                    </p>
+                    </div>
                 @enderror
 
             </div>
 
-            {{-- Buttons --}}
-            <div class="flex items-center gap-3">
+        </div>
 
-                <button
-                    type="submit"
-                    class="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700"
-                >
-                    Update Student
-                </button>
+        <!-- Actions -->
+        <div class="actions">
 
-                <a
-                    href="{{ route('students.show', $student) }}"
-                    class="bg-gray-200 text-gray-700 px-6 py-2 rounded-md hover:bg-gray-300"
-                >
-                    Cancel
-                </a>
+            <a
+                href="{{ route('students.show', $student) }}"
+                class="btn btn-secondary"
+            >
+                Cancel
+            </a>
 
-            </div>
+            <button
+                type="submit"
+                class="btn btn-primary"
+            >
+                Update Student
+            </button>
 
-        </form>
+        </div>
 
-    </div>
+    </form>
+
+</div>
+
 
 </div>
 
