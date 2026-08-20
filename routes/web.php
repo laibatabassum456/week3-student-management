@@ -5,6 +5,12 @@ use App\Http\Controllers\CourseController;
 use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 
+/*
+|--------------------------------------------------------------------------
+| Public Routes
+|--------------------------------------------------------------------------
+*/
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -17,23 +23,32 @@ Route::get('/', function () {
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth', 'verified', 'admin'])->name('dashboard');
+})
+    ->middleware(['auth', 'verified', 'admin'])
+    ->name('dashboard');
 
 /*
 |--------------------------------------------------------------------------
 | Students & Courses
 |--------------------------------------------------------------------------
 */
-Route::get('/students/{student}', [StudentController::class, 'show'])->name('students.show');
-Route::post('/students/{student}/image', [StudentController::class, 'updateImage'])
-    ->name('students.updateImage');
-Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
 
-Route::get('/students', [StudentController::class, 'index'])->name('students.index');
+// Student Resource Routes
+Route::resource('students', StudentController::class);
+
+// Student Profile Image Upload
+Route::post(
+    '/students/{student}/image',
+    [StudentController::class, 'updateImage']
+)->name('students.updateImage');
+
+// Courses
+Route::get('/courses', [CourseController::class, 'index'])
+    ->name('courses.index');
 
 /*
 |--------------------------------------------------------------------------
-| Profile
+| Profile Routes
 |--------------------------------------------------------------------------
 */
 
@@ -48,5 +63,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])
         ->name('profile.destroy');
 });
+
+/*
+|--------------------------------------------------------------------------
+| Authentication Routes
+|--------------------------------------------------------------------------
+*/
 
 require __DIR__.'/auth.php';
