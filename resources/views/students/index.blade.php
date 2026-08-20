@@ -1,11 +1,12 @@
-
+```blade
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Students | Student Management</title>
+    <title>Course Management</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -16,593 +17,490 @@
 
         body {
             margin: 0;
-            font-family: Inter, ui-sans-serif, system-ui, -apple-system,
-                BlinkMacSystemFont, "Segoe UI", sans-serif;
-            background: #f5f7fb;
-            color: #172033;
+            font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+            background: #eef1f7;
+            color: #182033;
         }
 
-        .page-wrapper {
-            min-height: 100vh;
-        }
+        /* =========================
+           NAVIGATION
+        ========================= */
 
-        /* Header */
-        .topbar {
-            height: 72px;
-            background: #ffffff;
-            border-bottom: 1px solid #e7eaf0;
+        .nav {
+            height: 70px;
+            background: #111827;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0 42px;
-            position: sticky;
-            top: 0;
-            z-index: 50;
+            padding: 0 45px;
+            color: white;
         }
 
-        .brand {
+        .logo {
             display: flex;
             align-items: center;
             gap: 12px;
-            text-decoration: none;
-            color: #172033;
         }
 
-        .brand-logo {
-            width: 40px;
-            height: 40px;
-            border-radius: 11px;
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
-            color: white;
+        .logo-box {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            background: #6366f1;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 17px;
             font-weight: 800;
         }
 
-        .brand-text {
-            display: flex;
-            flex-direction: column;
-            line-height: 1.2;
+        .logo-title {
+            font-size: 15px;
+            font-weight: 800;
         }
 
-        .brand-title {
-            font-size: 16px;
-            font-weight: 750;
-        }
-
-        .brand-subtitle {
-            color: #8a93a5;
-            font-size: 11px;
+        .logo-subtitle {
+            color: #9ca3af;
+            font-size: 10px;
             margin-top: 2px;
         }
 
-        .topbar-right {
+        .nav-right {
             display: flex;
             align-items: center;
-            gap: 16px;
+            gap: 20px;
         }
 
-        .dashboard-link {
+        .nav-link {
+            color: #cbd5e1;
             text-decoration: none;
-            color: #566074;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
-            padding: 9px 13px;
-            border-radius: 8px;
-            transition: 0.2s;
         }
 
-        .dashboard-link:hover {
-            background: #f3f4f8;
-            color: #4f46e5;
+        .nav-link:hover {
+            color: white;
         }
 
-        .user-pill {
+        .user {
             display: flex;
             align-items: center;
             gap: 9px;
-            padding-left: 15px;
-            border-left: 1px solid #e7eaf0;
+            padding-left: 18px;
+            border-left: 1px solid #374151;
         }
 
-        .user-avatar {
-            width: 35px;
-            height: 35px;
+        .avatar {
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
-            background: #eef2ff;
-            color: #4f46e5;
+            background: #6366f1;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .username {
             font-size: 12px;
-            font-weight: 800;
-        }
-
-        .user-name {
-            font-size: 13px;
-            font-weight: 650;
-            color: #30384a;
-        }
-
-        /* Main */
-        .main {
-            max-width: 1240px;
-            margin: 0 auto;
-            padding: 42px 28px 60px;
-        }
-
-        .page-heading {
-            display: flex;
-            align-items: flex-end;
-            justify-content: space-between;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .heading-label {
-            color: #6366f1;
-            font-size: 12px;
-            font-weight: 800;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-            margin-bottom: 7px;
-        }
-
-        .page-title {
-            margin: 0;
-            font-size: 31px;
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            color: #172033;
-        }
-
-        .page-description {
-            margin: 7px 0 0;
-            color: #7b8496;
-            font-size: 14px;
-        }
-
-        .add-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: #4f46e5;
-            color: white;
-            text-decoration: none;
-            padding: 11px 17px;
-            border-radius: 9px;
-            font-size: 13px;
-            font-weight: 700;
-            box-shadow: 0 5px 14px rgba(79, 70, 229, 0.18);
-            transition: 0.2s;
-            white-space: nowrap;
-        }
-
-        .add-button:hover {
-            background: #4338ca;
-            transform: translateY(-1px);
-        }
-
-        .add-icon {
-            font-size: 18px;
-            line-height: 1;
-        }
-
-        /* Alert */
-        .alert {
-            background: #ecfdf3;
-            border: 1px solid #bbf7d0;
-            color: #166534;
-            padding: 13px 16px;
-            border-radius: 9px;
-            margin-bottom: 24px;
-            font-size: 13px;
             font-weight: 600;
+            color: #e5e7eb;
         }
 
-        /* Filter */
-        .filter-card {
-            background: white;
-            border: 1px solid #e7eaf0;
-            border-radius: 13px;
-            padding: 18px;
-            margin-bottom: 24px;
-            box-shadow: 0 3px 12px rgba(16, 24, 40, 0.03);
+        /* =========================
+           PAGE
+        ========================= */
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 38px 25px 70px;
         }
 
-        .filter-header {
+        /* =========================
+           HERO
+        ========================= */
+
+        .hero {
+            background: #111827;
+            border-radius: 22px;
+            padding: 38px 42px;
+            color: white;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            margin-bottom: 14px;
-        }
-
-        .filter-title {
-            font-size: 13px;
-            font-weight: 750;
-            color: #343b4c;
-        }
-
-        .filter-count {
-            color: #8b94a5;
-            font-size: 12px;
-        }
-
-        .filter-form {
-            display: grid;
-            grid-template-columns: minmax(200px, 1fr) 210px auto auto;
-            gap: 10px;
-        }
-
-        .input-wrapper {
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 30px;
+            overflow: hidden;
             position: relative;
         }
 
-        .search-icon {
+        .hero::after {
+            content: "";
             position: absolute;
-            left: 13px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #9aa2b1;
-            font-size: 14px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: #6366f1;
+            opacity: .15;
+            right: -100px;
+            top: -130px;
         }
 
-        .filter-input,
-        .filter-select {
-            width: 100%;
-            height: 42px;
-            border: 1px solid #dfe3ea;
-            background: #fbfcfe;
-            border-radius: 8px;
-            padding: 0 13px;
-            color: #30384a;
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-label {
+            color: #a5b4fc;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 10px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .hero h1 {
+            margin: 0;
+            font-size: 34px;
+            font-weight: 850;
+            letter-spacing: -1px;
+        }
+
+        .hero p {
+            margin: 9px 0 0;
+            color: #cbd5e1;
             font-size: 13px;
-            outline: none;
-            transition: 0.2s;
+            max-width: 550px;
+            line-height: 1.6;
         }
 
-        .filter-input {
-            padding-left: 37px;
+        .hero-stat {
+            position: relative;
+            z-index: 2;
+            min-width: 170px;
+            padding: 20px;
+            border-radius: 16px;
+            background: rgba(255,255,255,.08);
+            border: 1px solid rgba(255,255,255,.1);
         }
 
-        .filter-input:focus,
-        .filter-select:focus {
-            border-color: #818cf8;
+        .hero-stat-label {
+            color: #9ca3af;
+            font-size: 11px;
+        }
+
+        .hero-stat-number {
+            font-size: 36px;
+            font-weight: 850;
+            margin-top: 4px;
+        }
+
+        /* =========================
+           QUICK STATS
+        ========================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 32px;
+        }
+
+        .stat {
             background: white;
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.09);
+            border-radius: 16px;
+            padding: 21px;
+            border: 1px solid #e1e5ec;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
-        .filter-button,
-        .reset-button {
-            height: 42px;
-            padding: 0 17px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 700;
-            cursor: pointer;
-            text-decoration: none;
-            display: inline-flex;
+        .stat-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 13px;
+            display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 20px;
         }
 
-        .filter-button {
-            border: none;
-            background: #172033;
-            color: white;
+        .purple {
+            background: #ede9fe;
         }
 
-        .filter-button:hover {
-            background: #0f172a;
+        .green {
+            background: #dcfce7;
         }
 
-        .reset-button {
-            border: 1px solid #dfe3ea;
-            color: #596274;
-            background: white;
+        .orange {
+            background: #ffedd5;
         }
 
-        .reset-button:hover {
-            background: #f8f9fb;
+        .stat-label {
+            color: #7b8495;
+            font-size: 11px;
+            font-weight: 600;
         }
 
-        /* Students card */
-        .students-card {
-            background: white;
-            border: 1px solid #e7eaf0;
-            border-radius: 13px;
-            overflow: hidden;
-            box-shadow: 0 3px 12px rgba(16, 24, 40, 0.03);
+        .stat-value {
+            font-size: 22px;
+            font-weight: 850;
+            margin-top: 3px;
         }
 
-        .students-card-header {
-            min-height: 58px;
-            padding: 0 22px;
-            border-bottom: 1px solid #edf0f4;
+        /* =========================
+           SECTION
+        ========================= */
+
+        .section-top {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            margin-bottom: 18px;
         }
 
-        .students-card-title {
-            font-size: 14px;
-            font-weight: 750;
-            color: #252c3b;
+        .section-top h2 {
+            margin: 0;
+            font-size: 19px;
+            font-weight: 850;
         }
 
-        .result-badge {
-            background: #f3f4f8;
-            color: #6b7280;
-            padding: 5px 9px;
-            border-radius: 6px;
-            font-size: 11px;
-            font-weight: 700;
-        }
-
-        .student-list {
-            width: 100%;
-        }
-
-        .student-row {
-            display: grid;
-            grid-template-columns: minmax(250px, 1.8fr) minmax(170px, 1fr) minmax(130px, .8fr) 110px;
-            align-items: center;
-            gap: 20px;
-            padding: 17px 22px;
-            border-bottom: 1px solid #f0f2f5;
-            transition: background 0.18s;
-        }
-
-        .student-row:last-child {
-            border-bottom: none;
-        }
-
-        .student-row:hover {
-            background: #fafbfe;
-        }
-
-        .table-heading {
-            background: #fafbfc;
+        .section-top span {
             color: #8a93a5;
-            font-size: 10px;
-            font-weight: 800;
-            letter-spacing: 0.07em;
-            text-transform: uppercase;
-            padding-top: 12px;
-            padding-bottom: 12px;
-        }
-
-        .table-heading:hover {
-            background: #fafbfc;
-        }
-
-        .student-info {
-            display: flex;
-            align-items: center;
-            gap: 13px;
-            min-width: 0;
-        }
-
-        .student-image {
-            width: 44px;
-            height: 44px;
-            flex: 0 0 44px;
-            border-radius: 10px;
-            object-fit: cover;
-            border: 1px solid #e5e7eb;
-            background: #f1f5f9;
-        }
-
-        .student-placeholder {
-            width: 44px;
-            height: 44px;
-            flex: 0 0 44px;
-            border-radius: 10px;
-            background: linear-gradient(135deg, #eef2ff, #f3e8ff);
-            color: #6366f1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 13px;
-            font-weight: 800;
-        }
-
-        .student-details {
-            min-width: 0;
-        }
-
-        .student-name {
-            display: block;
-            color: #202737;
-            font-size: 13px;
-            font-weight: 750;
-            text-decoration: none;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .student-name:hover {
-            color: #4f46e5;
-        }
-
-        .student-email {
-            margin-top: 3px;
-            color: #8a93a5;
-            font-size: 11px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .phone {
-            color: #596274;
             font-size: 12px;
         }
 
-        .course-badge {
-            display: inline-flex;
-            align-items: center;
-            padding: 5px 9px;
-            border-radius: 6px;
-            background: #f0fdf4;
-            color: #15803d;
-            font-size: 11px;
-            font-weight: 700;
+        /* =========================
+           COURSES
+        ========================= */
+
+        .courses {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
         }
 
-        .course-empty {
-            color: #9aa2b1;
-            font-size: 11px;
-        }
-
-        .view-button {
-            display: inline-flex;
-            justify-content: center;
-            align-items: center;
-            padding: 8px 12px;
-            border: 1px solid #dfe3ea;
-            border-radius: 7px;
-            text-decoration: none;
-            color: #4f46e5;
+        .course {
             background: white;
-            font-size: 11px;
-            font-weight: 750;
-            transition: 0.2s;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid #e1e5ec;
+            transition: .25s ease;
         }
 
-        .view-button:hover {
-            background: #eef2ff;
-            border-color: #c7d2fe;
+        .course:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 18px 35px rgba(15,23,42,.1);
         }
 
-        /* Empty state */
-        .empty-state {
-            text-align: center;
-            padding: 70px 25px;
+        .course-top {
+            height: 125px;
+            padding: 20px;
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
         }
 
-        .empty-icon {
-            width: 58px;
-            height: 58px;
-            margin: 0 auto 15px;
+        .course:nth-child(3n+1) .course-top {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+        }
+
+        .course:nth-child(3n+2) .course-top {
+            background: linear-gradient(135deg, #0891b2, #2563eb);
+        }
+
+        .course:nth-child(3n+3) .course-top {
+            background: linear-gradient(135deg, #059669, #0d9488);
+        }
+
+        .course-number {
+            color: rgba(255,255,255,.8);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        .course-symbol {
+            width: 52px;
+            height: 52px;
+            background: rgba(255,255,255,.18);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255,255,255,.25);
             border-radius: 15px;
-            background: #f1f5f9;
-            color: #64748b;
             display: flex;
             align-items: center;
             justify-content: center;
+            color: white;
             font-size: 23px;
         }
 
-        .empty-title {
-            font-size: 15px;
-            font-weight: 750;
-            color: #30384a;
+        .course-body {
+            padding: 21px;
         }
 
-        .empty-description {
-            color: #8a93a5;
+        .course-title {
+            margin: 0;
+            font-size: 17px;
+            font-weight: 800;
+            color: #182033;
+        }
+
+        .course-description {
+            color: #7b8495;
             font-size: 12px;
-            margin-top: 5px;
+            line-height: 1.6;
+            min-height: 40px;
+            margin: 8px 0 20px;
         }
 
-        /* Pagination */
-        .pagination-wrapper {
-            padding: 17px 22px;
-            border-top: 1px solid #edf0f4;
-        }
-
-        .pagination-wrapper nav {
+        .enrollment-row {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
         }
 
-        .pagination-wrapper svg {
-            width: 16px;
-            height: 16px;
+        .enrollment-label {
+            color: #6b7280;
+            font-size: 11px;
+            font-weight: 650;
         }
 
-        /* Responsive */
-        @media (max-width: 900px) {
-            .topbar {
-                padding: 0 20px;
-            }
-
-            .main {
-                padding: 30px 18px 50px;
-            }
-
-            .filter-form {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .student-row {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .table-heading {
-                display: none;
-            }
+        .enrollment-number {
+            color: #182033;
+            font-size: 13px;
+            font-weight: 850;
         }
 
-        @media (max-width: 640px) {
-            .topbar {
-                height: 64px;
+        .progress {
+            width: 100%;
+            height: 7px;
+            background: #edf0f5;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            border-radius: 20px;
+        }
+
+        .course:nth-child(3n+1) .progress-bar {
+            background: #6366f1;
+        }
+
+        .course:nth-child(3n+2) .progress-bar {
+            background: #0891b2;
+        }
+
+        .course:nth-child(3n+3) .progress-bar {
+            background: #059669;
+        }
+
+        .course-bottom {
+            margin-top: 18px;
+            padding-top: 15px;
+            border-top: 1px solid #edf0f4;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .active {
+            color: #15803d;
+            background: #dcfce7;
+            padding: 5px 9px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .course-code {
+            color: #9aa2b1;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
+        /* =========================
+           EMPTY
+        ========================= */
+
+        .empty {
+            background: white;
+            border: 1px solid #e1e5ec;
+            border-radius: 18px;
+            text-align: center;
+            padding: 75px 20px;
+        }
+
+        .empty-icon {
+            font-size: 42px;
+            margin-bottom: 15px;
+        }
+
+        .empty h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+
+        .empty p {
+            color: #8a93a5;
+            font-size: 13px;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 950px) {
+            .courses {
+                grid-template-columns: repeat(2, 1fr);
             }
 
-            .brand-subtitle,
-            .dashboard-link,
-            .user-name {
-                display: none;
-            }
-
-            .page-heading {
+            .hero {
                 align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 700px) {
+
+            .nav {
+                padding: 0 18px;
+            }
+
+            .username,
+            .nav-link {
+                display: none;
+            }
+
+            .container {
+                padding: 25px 15px 50px;
+            }
+
+            .hero {
+                padding: 28px;
                 flex-direction: column;
             }
 
-            .page-title {
-                font-size: 26px;
+            .hero h1 {
+                font-size: 28px;
             }
 
-            .add-button {
+            .hero-stat {
                 width: 100%;
-                justify-content: center;
             }
 
-            .filter-form {
+            .stats {
                 grid-template-columns: 1fr;
             }
 
-            .student-row {
-                display: flex;
-                flex-wrap: wrap;
-                gap: 12px;
-                padding: 17px;
-            }
-
-            .student-info {
-                width: 100%;
-            }
-
-            .phone {
-                flex: 1;
-            }
-
-            .course-badge,
-            .course-empty {
-                flex: 1;
-            }
-
-            .view-button {
-                width: 100%;
-            }
-
-            .students-card-header {
-                padding: 0 17px;
+            .courses {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -610,367 +508,319 @@
 
 <body>
 
-<div class="page-wrapper">
+<!-- =========================
+     NAVIGATION
+========================= -->
 
-    <!-- Top Navigation -->
-    <header class="topbar">
+<header class="nav">
 
-        <a href="{{ route('students.index') }}" class="brand">
+    <div class="logo">
 
-            <div class="brand-logo">
-                SM
+        <div class="logo-box">
+            SM
+        </div>
+
+        <div>
+            <div class="logo-title">
+                Student Management
             </div>
 
-            <div class="brand-text">
-                <span class="brand-title">
-                    Student Management
+            <div class="logo-subtitle">
+                Administration Portal
+            </div>
+        </div>
+
+    </div>
+
+
+    <div class="nav-right">
+
+        @auth
+
+            <a href="{{ route('dashboard') }}" class="nav-link">
+                Dashboard
+            </a>
+
+            <a href="{{ route('students.index') }}" class="nav-link">
+                Students
+            </a>
+
+            <div class="user">
+
+                <div class="avatar">
+                    {{ strtoupper(substr(auth()->user()->name, 0, 2)) }}
+                </div>
+
+                <span class="username">
+                    {{ auth()->user()->name }}
                 </span>
 
-                <span class="brand-subtitle">
-                    Administration Portal
-                </span>
             </div>
 
-        </a>
+        @endauth
 
-        <div class="topbar-right">
+    </div>
 
-            @auth
-                <a href="{{ route('dashboard') }}" class="dashboard-link">
-                    Dashboard
-                </a>
+</header>
 
-                <div class="user-pill">
 
-                    <div class="user-avatar">
-                        {{ strtoupper(substr(auth()->user()->name ?? 'GU', 0, 2)) }}
-                    </div>
+<main class="container">
 
-                    <span class="user-name">
-                        {{ auth()->user()->name ?? 'Guest' }}
-                    </span>
+    <!-- HERO -->
 
-                </div>
-            @else
-                <div class="user-pill">
+    <section class="hero">
 
-                    <div class="user-avatar">
-                        GU
-                    </div>
+        <div class="hero-content">
 
-                    <span class="user-name">
-                        Guest
-                    </span>
+            <div class="hero-label">
+                Academic Management
+            </div>
 
-                </div>
-            @endauth
+            <h1>
+                Course Management
+            </h1>
+
+            <p>
+                Manage your academic courses and monitor how many
+                students are enrolled in each program.
+            </p>
 
         </div>
 
-    </header>
+
+        <div class="hero-stat">
+
+            <div class="hero-stat-label">
+                AVAILABLE COURSES
+            </div>
+
+            <div class="hero-stat-number">
+                {{ $courses->count() }}
+            </div>
+
+        </div>
+
+    </section>
 
 
-    <!-- Main Content -->
-    <main class="main">
+    <!-- QUICK STATS -->
 
-        <!-- Page Heading -->
-        <div class="page-heading">
+    @php
+        $totalStudents = $courses->sum(function ($course) {
+            return $course->students->count();
+        });
+
+        $largestCourse = $courses->sortByDesc(function ($course) {
+            return $course->students->count();
+        })->first();
+
+        $largestEnrollment = $largestCourse
+            ? $largestCourse->students->count()
+            : 0;
+    @endphp
+
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <div class="stat-icon purple">
+                🎓
+            </div>
 
             <div>
 
-                <div class="heading-label">
-                    Administration
+                <div class="stat-label">
+                    TOTAL COURSES
                 </div>
 
-                <h1 class="page-title">
-                    Students
-                </h1>
-
-                <p class="page-description">
-                    Manage student records, courses, profiles and contact information.
-                </p>
+                <div class="stat-value">
+                    {{ $courses->count() }}
+                </div>
 
             </div>
-
-            @auth
-                <a href="{{ route('students.create') }}" class="add-button">
-                    <span class="add-icon">+</span>
-                    Add Student
-                </a>
-            @endauth
 
         </div>
 
 
-        <!-- Success Message -->
-        @if (session('success'))
+        <div class="stat">
 
-            <div class="alert">
-                {{ session('success') }}
+            <div class="stat-icon green">
+                👥
             </div>
 
-        @endif
+            <div>
 
-
-        <!-- Search & Filters -->
-        <section class="filter-card">
-
-            <div class="filter-header">
-
-                <span class="filter-title">
-                    Search & Filters
-                </span>
-
-                <span class="filter-count">
-                    {{ $students->total() }} student{{ $students->total() === 1 ? '' : 's' }}
-                </span>
-
-            </div>
-
-            <form method="GET" action="{{ route('students.index') }}" class="filter-form">
-
-                <div class="input-wrapper">
-
-                    <span class="search-icon">
-                        🔍
-                    </span>
-
-                    <input
-                        type="text"
-                        name="search"
-                        value="{{ request('search') }}"
-                        placeholder="Search by name or email..."
-                        class="filter-input"
-                    >
-
+                <div class="stat-label">
+                    TOTAL ENROLLMENTS
                 </div>
 
-                <select name="course_id" class="filter-select">
+                <div class="stat-value">
+                    {{ $totalStudents }}
+                </div>
 
-                    <option value="">
-                        All Courses
-                    </option>
+            </div>
 
-                    @foreach ($courses as $course)
+        </div>
 
-                        <option
-                            value="{{ $course->id }}"
-                            {{ request('course_id') == $course->id ? 'selected' : '' }}
-                        >
+
+        <div class="stat">
+
+            <div class="stat-icon orange">
+                ⭐
+            </div>
+
+            <div>
+
+                <div class="stat-label">
+                    LARGEST COURSE
+                </div>
+
+                <div class="stat-value">
+                    {{ $largestEnrollment }}
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- COURSE SECTION -->
+
+    <div class="section-top">
+
+        <h2>
+            Available Courses
+        </h2>
+
+        <span>
+            {{ $courses->count() }}
+            total
+        </span>
+
+    </div>
+
+
+    @if ($courses->count())
+
+        <div class="courses">
+
+            @foreach ($courses as $course)
+
+                @php
+                    $enrollment = $course->students->count();
+
+                    $maxEnrollment = 50;
+
+                    $percentage = min(
+                        100,
+                        ($enrollment / $maxEnrollment) * 100
+                    );
+                @endphp
+
+
+                <article class="course">
+
+                    <!-- COLOR HEADER -->
+
+                    <div class="course-top">
+
+                        <div class="course-number">
+                            COURSE {{ str_pad($course->id, 2, '0', STR_PAD_LEFT) }}
+                        </div>
+
+                        <div class="course-symbol">
+                            🎓
+                        </div>
+
+                    </div>
+
+
+                    <!-- BODY -->
+
+                    <div class="course-body">
+
+                        <h3 class="course-title">
                             {{ $course->name }}
-                        </option>
-
-                    @endforeach
-
-                </select>
-
-                <button type="submit" class="filter-button">
-                    Search
-                </button>
-
-                @if (request()->filled('search') || request()->filled('course_id'))
-
-                    <a href="{{ route('students.index') }}" class="reset-button">
-                        Reset
-                    </a>
-
-                @else
-
-                    <span class="reset-button" style="visibility: hidden;">
-                        Reset
-                    </span>
-
-                @endif
-
-            </form>
-
-        </section>
+                        </h3>
 
 
-        <!-- Students Table/Card -->
-        <section class="students-card">
+                        <p class="course-description">
 
-            <div class="students-card-header">
+                            {{ $course->description
+                                ?? 'Academic program available for student enrollment and management.' }}
 
-                <span class="students-card-title">
-                    Student Directory
-                </span>
+                        </p>
 
-                <span class="result-badge">
-                    {{ $students->count() }} shown
-                </span>
 
+                        <div class="enrollment-row">
+
+                            <span class="enrollment-label">
+                                Student Enrollment
+                            </span>
+
+                            <span class="enrollment-number">
+                                {{ $enrollment }}
+                            </span>
+
+                        </div>
+
+
+                        <div class="progress">
+
+                            <div
+                                class="progress-bar"
+                                style="width: {{ $percentage }}%;">
+                            </div>
+
+                        </div>
+
+
+                        <div class="course-bottom">
+
+                            <span class="active">
+                                ● ACTIVE
+                            </span>
+
+                            <span class="course-code">
+                                ID #{{ $course->id }}
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+            @endforeach
+
+        </div>
+
+    @else
+
+        <div class="empty">
+
+            <div class="empty-icon">
+                🎓
             </div>
 
+            <h3>
+                No Courses Available
+            </h3>
 
-            @if ($students->count())
+            <p>
+                There are currently no courses registered in the system.
+            </p>
 
-                <div class="student-list">
+        </div>
 
-                    <!-- Table Heading -->
-                    <div class="student-row table-heading">
+    @endif
 
-                        <div>
-                            Student
-                        </div>
-
-                        <div>
-                            Phone
-                        </div>
-
-                        <div>
-                            Course
-                        </div>
-
-                        <div>
-                            Action
-                        </div>
-
-                    </div>
-
-
-                    @foreach ($students as $student)
-
-                        <div class="student-row">
-
-                            <!-- Student -->
-                            <div class="student-info">
-
-                                @if ($student->image)
-
-                                    <img
-                                        src="{{ asset('storage/' . $student->image) }}"
-                                        alt="{{ $student->name }}"
-                                        class="student-image"
-                                    >
-
-                                @else
-
-                                    <div class="student-placeholder">
-                                        {{ strtoupper(substr($student->name, 0, 2)) }}
-                                    </div>
-
-                                @endif
-
-
-                                <div class="student-details">
-
-                                    <a
-                                        href="{{ route('students.show', $student) }}"
-                                        class="student-name"
-                                    >
-                                        {{ $student->name }}
-                                    </a>
-
-                                    <div class="student-email">
-                                        {{ $student->email }}
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-
-                            <!-- Phone -->
-                            <div class="phone">
-
-                                {{ $student->phone ?: 'Not provided' }}
-
-                            </div>
-
-
-                            <!-- Course -->
-                            <div>
-
-                                @if ($student->course)
-
-                                    <span class="course-badge">
-                                        {{ $student->course->name }}
-                                    </span>
-
-                                @else
-
-                                    <span class="course-empty">
-                                        No course assigned
-                                    </span>
-
-                                @endif
-
-                            </div>
-
-
-                            <!-- Action -->
-                            <div>
-
-                                <a
-                                    href="{{ route('students.show', $student) }}"
-                                    class="view-button"
-                                >
-                                    View Profile
-                                </a>
-
-                            </div>
-
-                        </div>
-
-                    @endforeach
-
-                </div>
-
-
-                <!-- Pagination -->
-                @if ($students->hasPages())
-
-                    <div class="pagination-wrapper">
-
-                        {{ $students->links() }}
-
-                    </div>
-
-                @endif
-
-            @else
-
-                <!-- Empty State -->
-                <div class="empty-state">
-
-                    <div class="empty-icon">
-                        👤
-                    </div>
-
-                    <div class="empty-title">
-                        No students found
-                    </div>
-
-                    <div class="empty-description">
-                        Try changing your search or course filter.
-                    </div>
-
-                    @if (request()->filled('search') || request()->filled('course_id'))
-
-                        <div style="margin-top: 18px;">
-
-                            <a
-                                href="{{ route('students.index') }}"
-                                class="reset-button"
-                            >
-                                Clear Filters
-                            </a>
-
-                        </div>
-
-                    @endif
-
-                </div>
-
-            @endif
-
-        </section>
-
-    </main>
-
-</div>
+</main>
 
 </body>
+
 </html>
 ```

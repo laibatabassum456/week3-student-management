@@ -1,361 +1,771 @@
 <x-app-layout>
+    <style>
+        .dashboard-shell {
+            min-height: calc(100vh - 65px);
+            background: #f5f7fb;
+            color: #172033;
+        }
 
-    <x-slot name="header">
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+
+    .dashboard-container {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 32px 24px 50px;
+    }
+
+    .dashboard-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        margin-bottom: 28px;
+    }
+
+    .eyebrow {
+        color: #64748b;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 7px;
+    }
+
+    .dashboard-title {
+        margin: 0;
+        font-size: 30px;
+        font-weight: 800;
+        letter-spacing: -0.6px;
+        color: #172033;
+    }
+
+    .dashboard-subtitle {
+        margin: 7px 0 0;
+        color: #7b8495;
+        font-size: 14px;
+    }
+
+    .admin-pill {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background: #ffffff;
+        border: 1px solid #e5e9f0;
+        border-radius: 12px;
+        padding: 9px 13px;
+        box-shadow: 0 3px 12px rgba(20, 32, 56, 0.04);
+    }
+
+    .admin-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background: #172033;
+        color: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 12px;
+        font-weight: 800;
+    }
+
+    .admin-label {
+        color: #8a93a3;
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: .5px;
+    }
+
+    .admin-name {
+        color: #263247;
+        font-size: 13px;
+        font-weight: 700;
+        margin-top: 2px;
+    }
+
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+        margin-bottom: 22px;
+    }
+
+    .stat-card {
+        background: #ffffff;
+        border: 1px solid #e5e9f0;
+        border-radius: 15px;
+        padding: 22px;
+        box-shadow: 0 4px 16px rgba(20, 32, 56, 0.045);
+        transition: transform .2s ease, box-shadow .2s ease;
+    }
+
+    .stat-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 22px rgba(20, 32, 56, 0.08);
+    }
+
+    .stat-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    .stat-label {
+        color: #7b8495;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: .5px;
+    }
+
+    .stat-number {
+        color: #172033;
+        font-size: 32px;
+        line-height: 1;
+        font-weight: 800;
+        margin-top: 10px;
+    }
+
+    .stat-icon {
+        width: 43px;
+        height: 43px;
+        border-radius: 11px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .icon-dark {
+        background: #edf0f4;
+        color: #172033;
+    }
+
+    .icon-blue {
+        background: #edf3ff;
+        color: #3156a3;
+    }
+
+    .icon-green {
+        background: #ecfdf3;
+        color: #16805b;
+    }
+
+    .stat-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        margin-top: 17px;
+        color: #526173;
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .stat-link:hover {
+        color: #172033;
+    }
+
+    .main-grid {
+        display: grid;
+        grid-template-columns: 1.55fr .9fr;
+        gap: 22px;
+        align-items: stretch;
+    }
+
+    .welcome-card {
+        position: relative;
+        overflow: hidden;
+        background: #172033;
+        color: white;
+        border-radius: 17px;
+        padding: 30px;
+        min-height: 270px;
+        box-shadow: 0 8px 25px rgba(23, 32, 51, 0.12);
+    }
+
+    .welcome-card::after {
+        content: "";
+        position: absolute;
+        width: 220px;
+        height: 220px;
+        border: 1px solid rgba(255,255,255,.08);
+        border-radius: 50%;
+        right: -80px;
+        top: -70px;
+    }
+
+    .welcome-card::before {
+        content: "";
+        position: absolute;
+        width: 150px;
+        height: 150px;
+        border: 1px solid rgba(255,255,255,.06);
+        border-radius: 50%;
+        right: 30px;
+        bottom: -90px;
+    }
+
+    .welcome-content {
+        position: relative;
+        z-index: 2;
+    }
+
+    .welcome-tag {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        background: rgba(255,255,255,.09);
+        border: 1px solid rgba(255,255,255,.1);
+        border-radius: 999px;
+        padding: 6px 10px;
+        font-size: 11px;
+        font-weight: 700;
+        margin-bottom: 20px;
+    }
+
+    .welcome-card h2 {
+        margin: 0;
+        font-size: 27px;
+        font-weight: 800;
+        letter-spacing: -.4px;
+    }
+
+    .welcome-card p {
+        max-width: 560px;
+        margin: 10px 0 0;
+        color: #b9c1cf;
+        font-size: 13px;
+        line-height: 1.7;
+    }
+
+    .welcome-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 25px;
+    }
+
+    .primary-action,
+    .secondary-action {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 15px;
+        border-radius: 9px;
+        text-decoration: none;
+        font-size: 12px;
+        font-weight: 700;
+        transition: .2s;
+    }
+
+    .primary-action {
+        background: white;
+        color: #172033;
+    }
+
+    .primary-action:hover {
+        background: #edf0f4;
+    }
+
+    .secondary-action {
+        background: rgba(255,255,255,.08);
+        border: 1px solid rgba(255,255,255,.12);
+        color: white;
+    }
+
+    .secondary-action:hover {
+        background: rgba(255,255,255,.14);
+    }
+
+    .quick-card {
+        background: #ffffff;
+        border: 1px solid #e5e9f0;
+        border-radius: 17px;
+        padding: 25px;
+        box-shadow: 0 4px 16px rgba(20, 32, 56, 0.045);
+    }
+
+    .quick-card h3 {
+        margin: 0;
+        color: #172033;
+        font-size: 17px;
+        font-weight: 800;
+    }
+
+    .quick-card-description {
+        margin: 7px 0 20px;
+        color: #7b8495;
+        font-size: 12px;
+        line-height: 1.6;
+    }
+
+    .quick-item {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 12px 0;
+        border-top: 1px solid #edf0f4;
+        text-decoration: none;
+    }
+
+    .quick-item:first-of-type {
+        border-top: 0;
+    }
+
+    .quick-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        background: #f1f4f8;
+        color: #3156a3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    .quick-text {
+        flex: 1;
+    }
+
+    .quick-title {
+        color: #263247;
+        font-size: 12px;
+        font-weight: 700;
+    }
+
+    .quick-subtitle {
+        color: #8a93a3;
+        font-size: 11px;
+        margin-top: 3px;
+    }
+
+    .quick-arrow {
+        color: #9aa3b1;
+        font-size: 16px;
+    }
+
+    .system-card {
+        margin-top: 22px;
+        background: #ffffff;
+        border: 1px solid #e5e9f0;
+        border-radius: 15px;
+        padding: 20px 22px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        box-shadow: 0 4px 16px rgba(20, 32, 56, 0.04);
+    }
+
+    .system-title {
+        color: #263247;
+        font-size: 13px;
+        font-weight: 700;
+    }
+
+    .system-text {
+        color: #8a93a3;
+        font-size: 11px;
+        margin-top: 4px;
+    }
+
+    .status {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 7px 11px;
+        border-radius: 999px;
+        background: #ecfdf3;
+        color: #166534;
+        font-size: 11px;
+        font-weight: 700;
+    }
+
+    .status-dot {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #22c55e;
+    }
+
+    @media (max-width: 900px) {
+        .stats-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .main-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .dashboard-container {
+            padding: 25px 15px 40px;
+        }
+
+        .dashboard-top {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+
+        .dashboard-title {
+            font-size: 25px;
+        }
+
+        .admin-pill {
+            width: 100%;
+        }
+
+        .welcome-card {
+            padding: 24px;
+        }
+
+        .welcome-card h2 {
+            font-size: 23px;
+        }
+
+        .welcome-actions {
+            flex-direction: column;
+        }
+
+        .primary-action,
+        .secondary-action {
+            width: 100%;
+        }
+
+        .system-card {
+            align-items: flex-start;
+            flex-direction: column;
+        }
+    }
+</style>
+
+<div class="dashboard-shell">
+
+    <div class="dashboard-container">
+
+        {{-- Dashboard Header --}}
+        <div class="dashboard-top">
+
             <div>
-                <h2 class="text-2xl font-bold text-gray-800">
-                    Admin Dashboard
-                </h2>
+                <div class="eyebrow">
+                    Administration
+                </div>
 
-                <p class="text-sm text-gray-500 mt-1">
-                    Overview of your student management system
-                </p>
-            </div>
-
-            <div class="text-sm text-gray-500">
-                Welcome back, <span class="font-semibold text-gray-700">
-                    {{ auth()->user()->name }}
-                </span>
-            </div>
-        </div>
-    </x-slot>
-
-    <div class="py-10 bg-gray-50 min-h-screen">
-
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-            {{-- Page Heading --}}
-            <div class="mb-8">
-                <h1 class="text-3xl font-bold text-gray-900">
+                <h1 class="dashboard-title">
                     Dashboard
                 </h1>
 
-                <p class="mt-2 text-gray-500">
-                    Manage students, courses and registered users from one place.
+                <p class="dashboard-subtitle">
+                    Overview of your student management system.
                 </p>
             </div>
 
+            <div class="admin-pill">
 
-            {{-- Statistics --}}
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-
-                {{-- Students --}}
-                <div class="bg-white rounded-2xl shadow-sm border border-gray-100
-                            hover:shadow-md transition duration-200">
-
-                    <div class="p-6">
-
-                        <div class="flex items-center justify-between">
-
-                            <div>
-                                <p class="text-sm font-medium text-gray-500">
-                                    Total Students
-                                </p>
-
-                                <p class="text-4xl font-bold text-gray-900 mt-2">
-                                    {{ \App\Models\Student::count() }}
-                                </p>
-                            </div>
-
-                            <div class="w-12 h-12 rounded-xl bg-indigo-50
-                                        flex items-center justify-center">
-
-                                <svg class="w-6 h-6 text-indigo-600"
-                                     fill="none"
-                                     stroke="currentColor"
-                                     viewBox="0 0 24 24">
-
-                                    <path stroke-linecap="round"
-                                          stroke-linejoin="round"
-                                          stroke-width="2"
-                                          d="M17 20h5v-2a3 3 0 00-5.196-2.121
-                                             M9 20H4v-2a3 3 0 015.196-2.121
-                                             M15 11a4 4 0 10-6 0
-                                             M17 8a3 3 0 11-6 0
-                                             M7 8a3 3 0 11-6 0"/>
-                                </svg>
-
-                            </div>
-
-                        </div>
-
-                        <a href="{{ route('students.index') }}"
-                           class="inline-flex items-center mt-5 text-sm font-semibold
-                                  text-indigo-600 hover:text-indigo-800">
-
-                            View Students
-
-                            <span class="ml-2">
-                                →
-                            </span>
-
-                        </a>
-
-                    </div>
-
+                <div class="admin-avatar">
+                    {{ strtoupper(substr(auth()->user()->name ?? 'AD', 0, 2)) }}
                 </div>
 
-
-                {{-- Courses --}}
-                <div class="bg-white rounded-2xl shadow-sm border border-gray-100
-                            hover:shadow-md transition duration-200">
-
-                    <div class="p-6">
-
-                        <div class="flex items-center justify-between">
-
-                            <div>
-                                <p class="text-sm font-medium text-gray-500">
-                                    Total Courses
-                                </p>
-
-                                <p class="text-4xl font-bold text-gray-900 mt-2">
-                                    {{ \App\Models\Course::count() }}
-                                </p>
-                            </div>
-
-                            <div class="w-12 h-12 rounded-xl bg-emerald-50
-                                        flex items-center justify-center">
-
-                                <svg class="w-6 h-6 text-emerald-600"
-                                     fill="none"
-                                     stroke="currentColor"
-                                     viewBox="0 0 24 24">
-
-                                    <path stroke-linecap="round"
-                                          stroke-linejoin="round"
-                                          stroke-width="2"
-                                          d="M12 14l9-5-9-5-9 5 9 5z"/>
-
-                                    <path stroke-linecap="round"
-                                          stroke-linejoin="round"
-                                          stroke-width="2"
-                                          d="M12 14l6.16-3.422
-                                             A12.083 12.083 0 0118 20.5
-                                             12.083 12.083 0 016 20.5
-                                             12.083 12.083 0 015.84 10.578
-                                             L12 14z"/>
-                                </svg>
-
-                            </div>
-
-                        </div>
-
-                        <a href="{{ route('courses.index') }}"
-                           class="inline-flex items-center mt-5 text-sm font-semibold
-                                  text-emerald-600 hover:text-emerald-800">
-
-                            View Courses
-
-                            <span class="ml-2">
-                                →
-                            </span>
-
-                        </a>
-
+                <div>
+                    <div class="admin-label">
+                        Signed in as
                     </div>
 
-                </div>
-
-
-                {{-- Users --}}
-                <div class="bg-white rounded-2xl shadow-sm border border-gray-100
-                            hover:shadow-md transition duration-200">
-
-                    <div class="p-6">
-
-                        <div class="flex items-center justify-between">
-
-                            <div>
-                                <p class="text-sm font-medium text-gray-500">
-                                    Total Users
-                                </p>
-
-                                <p class="text-4xl font-bold text-gray-900 mt-2">
-                                    {{ \App\Models\User::count() }}
-                                </p>
-                            </div>
-
-                            <div class="w-12 h-12 rounded-xl bg-purple-50
-                                        flex items-center justify-center">
-
-                                <svg class="w-6 h-6 text-purple-600"
-                                     fill="none"
-                                     stroke="currentColor"
-                                     viewBox="0 0 24 24">
-
-                                    <path stroke-linecap="round"
-                                          stroke-linejoin="round"
-                                          stroke-width="2"
-                                          d="M16 7a4 4 0 11-8 0
-                                             4 4 0 018 0z
-                                             M12 14a7 7 0 00-7 7h14
-                                             a7 7 0 00-7-7z"/>
-                                </svg>
-
-                            </div>
-
-                        </div>
-
-                        <span class="inline-block mt-5 text-sm text-gray-500">
-                            Registered Accounts
-                        </span>
-
+                    <div class="admin-name">
+                        {{ auth()->user()->name ?? 'Administrator' }}
                     </div>
-
                 </div>
 
             </div>
 
+        </div>
 
-            {{-- Welcome Card --}}
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-100
-                        overflow-hidden mb-8">
 
-                <div class="p-8">
+        {{-- Statistics --}}
+        <div class="stats-grid">
 
-                    <div class="flex flex-col md:flex-row md:items-center
-                                md:justify-between gap-6">
+            {{-- Students --}}
+            <div class="stat-card">
 
-                        <div>
+                <div class="stat-top">
 
-                            <div class="flex items-center gap-3 mb-3">
-
-                                <div class="w-10 h-10 rounded-full bg-indigo-100
-                                            flex items-center justify-center">
-
-                                    <span class="text-indigo-700 font-bold">
-                                        {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
-                                    </span>
-
-                                </div>
-
-                                <span class="text-sm font-medium text-indigo-600">
-                                    Administrator
-                                </span>
-
-                            </div>
-
-                            <h3 class="text-2xl font-bold text-gray-900">
-                                Welcome, {{ auth()->user()->name }}!
-                            </h3>
-
-                            <p class="text-gray-500 mt-2 max-w-xl">
-                                You are logged in as an administrator.
-                                Use the quick actions to manage students and courses.
-                            </p>
-
+                    <div>
+                        <div class="stat-label">
+                            Total Students
                         </div>
 
+                        <div class="stat-number">
+                            {{ \App\Models\Student::count() }}
+                        </div>
                     </div>
 
+                    <div class="stat-icon icon-dark">
+                        <svg width="21" height="21" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="1.8"
+                                  d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/>
+                            <circle cx="9" cy="7" r="4" stroke-width="1.8"/>
+                            <path stroke-linecap="round"
+                                  stroke-width="1.8"
+                                  d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                        </svg>
+                    </div>
 
-                    {{-- Action Buttons --}}
-                    <div class="mt-8 flex flex-col sm:flex-row gap-3">
+                </div>
+
+                <a href="{{ route('students.index') }}" class="stat-link">
+                    View student directory
+                    <span>→</span>
+                </a>
+
+            </div>
+
+
+            {{-- Courses --}}
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div>
+                        <div class="stat-label">
+                            Total Courses
+                        </div>
+
+                        <div class="stat-number">
+                            {{ \App\Models\Course::count() }}
+                        </div>
+                    </div>
+
+                    <div class="stat-icon icon-blue">
+                        <svg width="21" height="21" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="1.8"
+                                  d="M12 3L2 8l10 5 10-5-10-5z"/>
+                            <path stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="1.8"
+                                  d="M6 10.5V16c3.5 3 8.5 3 12 0v-5.5"/>
+                        </svg>
+                    </div>
+
+                </div>
+
+                <a href="{{ route('courses.index') }}" class="stat-link">
+                    View course directory
+                    <span>→</span>
+                </a>
+
+            </div>
+
+
+            {{-- Users --}}
+            <div class="stat-card">
+
+                <div class="stat-top">
+
+                    <div>
+                        <div class="stat-label">
+                            Registered Users
+                        </div>
+
+                        <div class="stat-number">
+                            {{ \App\Models\User::count() }}
+                        </div>
+                    </div>
+
+                    <div class="stat-icon icon-green">
+                        <svg width="21" height="21" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <circle cx="12" cy="8" r="4" stroke-width="1.8"/>
+                            <path stroke-linecap="round"
+                                  stroke-width="1.8"
+                                  d="M4 21a8 8 0 0116 0"/>
+                        </svg>
+                    </div>
+
+                </div>
+
+                <span class="stat-link">
+                    Active administration accounts
+                </span>
+
+            </div>
+
+        </div>
+
+
+        {{-- Main Content --}}
+        <div class="main-grid">
+
+            {{-- Welcome --}}
+            <section class="welcome-card">
+
+                <div class="welcome-content">
+
+                    <div class="welcome-tag">
+                        <span>●</span>
+                        Administrator Access
+                    </div>
+
+                    <h2>
+                        Welcome back, {{ auth()->user()->name ?? 'Administrator' }}.
+                    </h2>
+
+                    <p>
+                        Manage your student records, profiles and courses
+                        from one centralized administration portal.
+                    </p>
+
+                    <div class="welcome-actions">
 
                         <a href="{{ route('students.index') }}"
-                           class="inline-flex items-center justify-center
-                                  px-5 py-3 rounded-xl
-                                  bg-indigo-600 text-white font-semibold
-                                  hover:bg-indigo-700
-                                  transition duration-200 shadow-sm">
-
+                           class="primary-action">
                             Manage Students
-
-                            <span class="ml-2">
-                                →
-                            </span>
-
+                            <span style="margin-left:8px;">→</span>
                         </a>
-
 
                         <a href="{{ route('students.create') }}"
-                           class="inline-flex items-center justify-center
-                                  px-5 py-3 rounded-xl
-                                  border border-gray-200
-                                  bg-white text-gray-700 font-semibold
-                                  hover:bg-gray-50
-                                  transition duration-200">
-
+                           class="secondary-action">
                             + Add Student
-
-                        </a>
-
-
-                        <a href="{{ route('courses.index') }}"
-                           class="inline-flex items-center justify-center
-                                  px-5 py-3 rounded-xl
-                                  bg-gray-900 text-white font-semibold
-                                  hover:bg-gray-800
-                                  transition duration-200">
-
-                            Manage Courses
-
-                            <span class="ml-2">
-                                →
-                            </span>
-
                         </a>
 
                     </div>
 
                 </div>
 
+            </section>
+
+
+            {{-- Quick Actions --}}
+            <section class="quick-card">
+
+                <h3>
+                    Quick Actions
+                </h3>
+
+                <p class="quick-card-description">
+                    Frequently used administration tools.
+                </p>
+
+
+                <a href="{{ route('students.index') }}" class="quick-item">
+
+                    <div class="quick-icon">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="1.8"
+                                  d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/>
+                            <circle cx="9" cy="7" r="4" stroke-width="1.8"/>
+                        </svg>
+                    </div>
+
+                    <div class="quick-text">
+                        <div class="quick-title">
+                            Student Directory
+                        </div>
+
+                        <div class="quick-subtitle">
+                            Search and manage students
+                        </div>
+                    </div>
+
+                    <div class="quick-arrow">
+                        →
+                    </div>
+
+                </a>
+
+
+                <a href="{{ route('students.create') }}" class="quick-item">
+
+                    <div class="quick-icon">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="1.8"
+                                  d="M12 5v14M5 12h14"/>
+                        </svg>
+                    </div>
+
+                    <div class="quick-text">
+                        <div class="quick-title">
+                            Add Student
+                        </div>
+
+                        <div class="quick-subtitle">
+                            Create a new student record
+                        </div>
+                    </div>
+
+                    <div class="quick-arrow">
+                        →
+                    </div>
+
+                </a>
+
+
+                <a href="{{ route('courses.index') }}" class="quick-item">
+
+                    <div class="quick-icon">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="1.8"
+                                  d="M12 3L2 8l10 5 10-5-10-5z"/>
+                            <path stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="1.8"
+                                  d="M6 10.5V16c3.5 3 8.5 3 12 0v-5.5"/>
+                        </svg>
+                    </div>
+
+                    <div class="quick-text">
+                        <div class="quick-title">
+                            Course Management
+                        </div>
+
+                        <div class="quick-subtitle">
+                            View available courses
+                        </div>
+                    </div>
+
+                    <div class="quick-arrow">
+                        →
+                    </div>
+
+                </a>
+
+            </section>
+
+        </div>
+
+
+        {{-- System Status --}}
+        <div class="system-card">
+
+            <div>
+                <div class="system-title">
+                    Student Management System
+                </div>
+
+                <div class="system-text">
+                    Administration portal is ready for use.
+                </div>
             </div>
 
-
-            {{-- Quick Information --}}
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-                <div class="bg-white rounded-2xl border border-gray-100
-                            shadow-sm p-6">
-
-                    <h3 class="text-lg font-bold text-gray-900">
-                        Student Management
-                    </h3>
-
-                    <p class="text-sm text-gray-500 mt-2">
-                        Add new students, update their information,
-                        upload profile images and view student profiles.
-                    </p>
-
-                    <a href="{{ route('students.index') }}"
-                       class="inline-block mt-4 text-sm font-semibold
-                              text-indigo-600 hover:text-indigo-800">
-
-                        Open Student Module →
-
-                    </a>
-
-                </div>
-
-
-                <div class="bg-white rounded-2xl border border-gray-100
-                            shadow-sm p-6">
-
-                    <h3 class="text-lg font-bold text-gray-900">
-                        Course Management
-                    </h3>
-
-                    <p class="text-sm text-gray-500 mt-2">
-                        View available courses and see the number of
-                        students enrolled in each course.
-                    </p>
-
-                    <a href="{{ route('courses.index') }}"
-                       class="inline-block mt-4 text-sm font-semibold
-                              text-emerald-600 hover:text-emerald-800">
-
-                        Open Course Module →
-
-                    </a>
-
-                </div>
-
+            <div class="status">
+                <span class="status-dot"></span>
+                System Online
             </div>
 
         </div>
 
     </div>
+
+</div>
+
 
 </x-app-layout>
