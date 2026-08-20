@@ -25,6 +25,8 @@ Route::get('/dashboard', function () {
 |--------------------------------------------------------------------------
 */
 Route::get('/students/{student}', [StudentController::class, 'show'])->name('students.show');
+Route::post('/students/{student}/image', [StudentController::class, 'updateImage'])
+    ->name('students.updateImage');
 Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
 
 Route::get('/students', [StudentController::class, 'index'])->name('students.index');
