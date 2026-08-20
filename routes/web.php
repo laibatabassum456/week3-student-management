@@ -24,7 +24,7 @@ Route::get('/dashboard', function () {
 | Students & Courses
 |--------------------------------------------------------------------------
 */
-
+Route::get('/students/{student}', [StudentController::class, 'show'])->name('students.show');
 Route::get('/courses', [CourseController::class, 'index'])->name('courses.index');
 
 Route::get('/students', [StudentController::class, 'index'])->name('students.index');

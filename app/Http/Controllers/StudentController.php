@@ -12,4 +12,11 @@ class StudentController extends Controller
 
         return view('students.index', compact('students'));
     }
+
+    public function show(Student $student)
+    {
+        $student->load('course');
+
+        return view('students.show', compact('student'));
+    }
 }
