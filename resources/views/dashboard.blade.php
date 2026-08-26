@@ -1,771 +1,735 @@
 <x-app-layout>
+
     <style>
-        .dashboard-shell {
-            min-height: calc(100vh - 65px);
-            background: #f5f7fb;
-            color: #172033;
+        .dashboard-page {
+            background: #eef1f7;
+            min-height: calc(100vh - 70px);
+            padding: 38px 25px 70px;
         }
 
-
-    .dashboard-container {
-        max-width: 1280px;
-        margin: 0 auto;
-        padding: 32px 24px 50px;
-    }
-
-    .dashboard-top {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 20px;
-        margin-bottom: 28px;
-    }
-
-    .eyebrow {
-        color: #64748b;
-        font-size: 12px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        margin-bottom: 7px;
-    }
-
-    .dashboard-title {
-        margin: 0;
-        font-size: 30px;
-        font-weight: 800;
-        letter-spacing: -0.6px;
-        color: #172033;
-    }
-
-    .dashboard-subtitle {
-        margin: 7px 0 0;
-        color: #7b8495;
-        font-size: 14px;
-    }
-
-    .admin-pill {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        background: #ffffff;
-        border: 1px solid #e5e9f0;
-        border-radius: 12px;
-        padding: 9px 13px;
-        box-shadow: 0 3px 12px rgba(20, 32, 56, 0.04);
-    }
-
-    .admin-avatar {
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-        background: #172033;
-        color: #ffffff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 12px;
-        font-weight: 800;
-    }
-
-    .admin-label {
-        color: #8a93a3;
-        font-size: 10px;
-        text-transform: uppercase;
-        letter-spacing: .5px;
-    }
-
-    .admin-name {
-        color: #263247;
-        font-size: 13px;
-        font-weight: 700;
-        margin-top: 2px;
-    }
-
-    .stats-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 18px;
-        margin-bottom: 22px;
-    }
-
-    .stat-card {
-        background: #ffffff;
-        border: 1px solid #e5e9f0;
-        border-radius: 15px;
-        padding: 22px;
-        box-shadow: 0 4px 16px rgba(20, 32, 56, 0.045);
-        transition: transform .2s ease, box-shadow .2s ease;
-    }
-
-    .stat-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 22px rgba(20, 32, 56, 0.08);
-    }
-
-    .stat-top {
-        display: flex;
-        justify-content: space-between;
-        align-items: flex-start;
-    }
-
-    .stat-label {
-        color: #7b8495;
-        font-size: 12px;
-        font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: .5px;
-    }
-
-    .stat-number {
-        color: #172033;
-        font-size: 32px;
-        line-height: 1;
-        font-weight: 800;
-        margin-top: 10px;
-    }
-
-    .stat-icon {
-        width: 43px;
-        height: 43px;
-        border-radius: 11px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .icon-dark {
-        background: #edf0f4;
-        color: #172033;
-    }
-
-    .icon-blue {
-        background: #edf3ff;
-        color: #3156a3;
-    }
-
-    .icon-green {
-        background: #ecfdf3;
-        color: #16805b;
-    }
-
-    .stat-link {
-        display: inline-flex;
-        align-items: center;
-        gap: 7px;
-        margin-top: 17px;
-        color: #526173;
-        text-decoration: none;
-        font-size: 12px;
-        font-weight: 700;
-    }
-
-    .stat-link:hover {
-        color: #172033;
-    }
-
-    .main-grid {
-        display: grid;
-        grid-template-columns: 1.55fr .9fr;
-        gap: 22px;
-        align-items: stretch;
-    }
-
-    .welcome-card {
-        position: relative;
-        overflow: hidden;
-        background: #172033;
-        color: white;
-        border-radius: 17px;
-        padding: 30px;
-        min-height: 270px;
-        box-shadow: 0 8px 25px rgba(23, 32, 51, 0.12);
-    }
-
-    .welcome-card::after {
-        content: "";
-        position: absolute;
-        width: 220px;
-        height: 220px;
-        border: 1px solid rgba(255,255,255,.08);
-        border-radius: 50%;
-        right: -80px;
-        top: -70px;
-    }
-
-    .welcome-card::before {
-        content: "";
-        position: absolute;
-        width: 150px;
-        height: 150px;
-        border: 1px solid rgba(255,255,255,.06);
-        border-radius: 50%;
-        right: 30px;
-        bottom: -90px;
-    }
-
-    .welcome-content {
-        position: relative;
-        z-index: 2;
-    }
-
-    .welcome-tag {
-        display: inline-flex;
-        align-items: center;
-        gap: 7px;
-        background: rgba(255,255,255,.09);
-        border: 1px solid rgba(255,255,255,.1);
-        border-radius: 999px;
-        padding: 6px 10px;
-        font-size: 11px;
-        font-weight: 700;
-        margin-bottom: 20px;
-    }
-
-    .welcome-card h2 {
-        margin: 0;
-        font-size: 27px;
-        font-weight: 800;
-        letter-spacing: -.4px;
-    }
-
-    .welcome-card p {
-        max-width: 560px;
-        margin: 10px 0 0;
-        color: #b9c1cf;
-        font-size: 13px;
-        line-height: 1.7;
-    }
-
-    .welcome-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 25px;
-    }
-
-    .primary-action,
-    .secondary-action {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 10px 15px;
-        border-radius: 9px;
-        text-decoration: none;
-        font-size: 12px;
-        font-weight: 700;
-        transition: .2s;
-    }
-
-    .primary-action {
-        background: white;
-        color: #172033;
-    }
-
-    .primary-action:hover {
-        background: #edf0f4;
-    }
-
-    .secondary-action {
-        background: rgba(255,255,255,.08);
-        border: 1px solid rgba(255,255,255,.12);
-        color: white;
-    }
-
-    .secondary-action:hover {
-        background: rgba(255,255,255,.14);
-    }
-
-    .quick-card {
-        background: #ffffff;
-        border: 1px solid #e5e9f0;
-        border-radius: 17px;
-        padding: 25px;
-        box-shadow: 0 4px 16px rgba(20, 32, 56, 0.045);
-    }
-
-    .quick-card h3 {
-        margin: 0;
-        color: #172033;
-        font-size: 17px;
-        font-weight: 800;
-    }
-
-    .quick-card-description {
-        margin: 7px 0 20px;
-        color: #7b8495;
-        font-size: 12px;
-        line-height: 1.6;
-    }
-
-    .quick-item {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 12px 0;
-        border-top: 1px solid #edf0f4;
-        text-decoration: none;
-    }
-
-    .quick-item:first-of-type {
-        border-top: 0;
-    }
-
-    .quick-icon {
-        width: 38px;
-        height: 38px;
-        border-radius: 10px;
-        background: #f1f4f8;
-        color: #3156a3;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-    }
-
-    .quick-text {
-        flex: 1;
-    }
-
-    .quick-title {
-        color: #263247;
-        font-size: 12px;
-        font-weight: 700;
-    }
-
-    .quick-subtitle {
-        color: #8a93a3;
-        font-size: 11px;
-        margin-top: 3px;
-    }
-
-    .quick-arrow {
-        color: #9aa3b1;
-        font-size: 16px;
-    }
-
-    .system-card {
-        margin-top: 22px;
-        background: #ffffff;
-        border: 1px solid #e5e9f0;
-        border-radius: 15px;
-        padding: 20px 22px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 20px;
-        box-shadow: 0 4px 16px rgba(20, 32, 56, 0.04);
-    }
-
-    .system-title {
-        color: #263247;
-        font-size: 13px;
-        font-weight: 700;
-    }
-
-    .system-text {
-        color: #8a93a3;
-        font-size: 11px;
-        margin-top: 4px;
-    }
-
-    .status {
-        display: inline-flex;
-        align-items: center;
-        gap: 7px;
-        padding: 7px 11px;
-        border-radius: 999px;
-        background: #ecfdf3;
-        color: #166534;
-        font-size: 11px;
-        font-weight: 700;
-    }
-
-    .status-dot {
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: #22c55e;
-    }
-
-    @media (max-width: 900px) {
-        .stats-grid {
-            grid-template-columns: 1fr;
-        }
-
-        .main-grid {
-            grid-template-columns: 1fr;
-        }
-    }
-
-    @media (max-width: 600px) {
         .dashboard-container {
-            padding: 25px 15px 40px;
+            max-width: 1200px;
+            margin: auto;
         }
 
-        .dashboard-top {
-            align-items: flex-start;
-            flex-direction: column;
+        /* =========================
+           HERO
+        ========================= */
+
+        .dashboard-hero {
+            background: #111827;
+            border-radius: 22px;
+            padding: 38px 42px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 28px;
+            overflow: hidden;
+            position: relative;
         }
 
-        .dashboard-title {
-            font-size: 25px;
+        .dashboard-hero::after {
+            content: "";
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            background: #6366f1;
+            opacity: .15;
+            right: -110px;
+            top: -150px;
         }
 
-        .admin-pill {
-            width: 100%;
+        .hero-content {
+            position: relative;
+            z-index: 2;
         }
+
+        .hero-label {
+            color: #a5b4fc;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 10px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+
+        .hero-title {
+            margin: 0;
+            font-size: 34px;
+            font-weight: 850;
+            letter-spacing: -1px;
+        }
+
+        .hero-description {
+            margin: 9px 0 0;
+            color: #cbd5e1;
+            font-size: 13px;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .hero-user {
+            position: relative;
+            z-index: 2;
+            min-width: 210px;
+            padding: 20px;
+            border-radius: 16px;
+            background: rgba(255,255,255,.08);
+            border: 1px solid rgba(255,255,255,.1);
+        }
+
+        .hero-user-label {
+            color: #9ca3af;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 700;
+        }
+
+        .hero-user-name {
+            font-size: 20px;
+            font-weight: 800;
+            margin-top: 6px;
+            color: white;
+        }
+
+        .hero-user-role {
+            color: #a5b4fc;
+            font-size: 11px;
+            margin-top: 3px;
+        }
+
+        /* =========================
+           STATISTICS
+        ========================= */
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin-bottom: 28px;
+        }
+
+        .stat-card {
+            background: white;
+            border: 1px solid #e1e5ec;
+            border-radius: 17px;
+            padding: 21px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: .2s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(15,23,42,.07);
+        }
+
+        .stat-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .student-icon {
+            background: #ede9fe;
+        }
+
+        .course-icon {
+            background: #cffafe;
+        }
+
+        .user-icon {
+            background: #dcfce7;
+        }
+
+        .admin-icon {
+            background: #fef3c7;
+        }
+
+        .stat-label {
+            color: #7b8495;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .4px;
+        }
+
+        .stat-value {
+            color: #182033;
+            font-size: 28px;
+            font-weight: 850;
+            margin-top: 3px;
+        }
+
+        .stat-link {
+            display: inline-block;
+            margin-top: 5px;
+            color: #6366f1;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 750;
+        }
+
+        .stat-link:hover {
+            color: #4f46e5;
+        }
+
+        .stat-description {
+            display: inline-block;
+            margin-top: 5px;
+            color: #8a93a5;
+            font-size: 11px;
+        }
+
+        /* =========================
+           WELCOME CARD
+        ========================= */
 
         .welcome-card {
-            padding: 24px;
+            background: white;
+            border: 1px solid #e1e5ec;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 28px;
         }
 
-        .welcome-card h2 {
-            font-size: 23px;
+        .welcome-label {
+            color: #6366f1;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 10px;
+            font-weight: 800;
+            margin-bottom: 8px;
         }
 
-        .welcome-actions {
-            flex-direction: column;
+        .welcome-title {
+            margin: 0;
+            font-size: 24px;
+            font-weight: 850;
+            color: #182033;
         }
 
-        .primary-action,
-        .secondary-action {
-            width: 100%;
+        .welcome-text {
+            color: #7b8495;
+            font-size: 13px;
+            line-height: 1.6;
+            margin: 8px 0 22px;
         }
 
-        .system-card {
-            align-items: flex-start;
-            flex-direction: column;
+        .action-buttons {
+            display: flex;
+            gap: 11px;
+            flex-wrap: wrap;
         }
-    }
-</style>
 
-<div class="dashboard-shell">
+        .primary-button,
+        .secondary-button,
+        .admin-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 11px 18px;
+            border-radius: 9px;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 800;
+            transition: .2s ease;
+        }
 
-    <div class="dashboard-container">
+        .primary-button {
+            background: #6366f1;
+            color: white;
+        }
 
-        {{-- Dashboard Header --}}
-        <div class="dashboard-top">
+        .primary-button:hover {
+            background: #4f46e5;
+            transform: translateY(-1px);
+        }
 
-            <div>
-                <div class="eyebrow">
-                    Administration
-                </div>
+        .secondary-button {
+            background: #111827;
+            color: white;
+        }
 
-                <h1 class="dashboard-title">
-                    Dashboard
-                </h1>
+        .secondary-button:hover {
+            background: #1f2937;
+            transform: translateY(-1px);
+        }
 
-                <p class="dashboard-subtitle">
-                    Overview of your student management system.
-                </p>
-            </div>
+        .admin-button {
+            background: #059669;
+            color: white;
+        }
 
-            <div class="admin-pill">
+        .admin-button:hover {
+            background: #047857;
+            transform: translateY(-1px);
+        }
 
-                <div class="admin-avatar">
-                    {{ strtoupper(substr(auth()->user()->name ?? 'AD', 0, 2)) }}
-                </div>
+        /* =========================
+           QUICK ACCESS
+        ========================= */
 
-                <div>
-                    <div class="admin-label">
-                        Signed in as
+        .section-title {
+            margin: 0 0 15px;
+            font-size: 18px;
+            font-weight: 850;
+            color: #182033;
+        }
+
+        .quick-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .quick-card {
+            background: white;
+            border: 1px solid #e1e5ec;
+            border-radius: 16px;
+            padding: 20px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            transition: .2s ease;
+        }
+
+        .quick-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(15,23,42,.07);
+        }
+
+        .quick-left {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+        }
+
+        .quick-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 19px;
+            flex-shrink: 0;
+        }
+
+        .quick-student-icon {
+            background: #ede9fe;
+        }
+
+        .quick-course-icon {
+            background: #cffafe;
+        }
+
+        .quick-user-icon {
+            background: #dcfce7;
+        }
+
+        .quick-title {
+            color: #182033;
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .quick-description {
+            color: #8a93a5;
+            font-size: 10px;
+            margin-top: 3px;
+        }
+
+        .quick-arrow {
+            color: #6366f1;
+            font-size: 17px;
+            font-weight: 800;
+        }
+
+        /* =========================
+           RESPONSIVE
+        ========================= */
+
+        @media (max-width: 950px) {
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .dashboard-hero {
+                align-items: flex-start;
+            }
+
+            .quick-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            .dashboard-page {
+                padding: 25px 15px 50px;
+            }
+
+            .dashboard-hero {
+                padding: 28px;
+                flex-direction: column;
+            }
+
+            .hero-title {
+                font-size: 28px;
+            }
+
+            .hero-user {
+                width: 100%;
+            }
+
+            .welcome-card {
+                padding: 24px;
+            }
+
+            .welcome-title {
+                font-size: 21px;
+            }
+
+            .primary-button,
+            .secondary-button,
+            .admin-button {
+                width: 100%;
+            }
+        }
+    </style>
+
+
+    <!-- =========================
+         DASHBOARD PAGE
+    ========================= -->
+
+    <div class="dashboard-page">
+
+        <div class="dashboard-container">
+
+
+            <!-- =========================
+                 HERO
+            ========================= -->
+
+            <section class="dashboard-hero">
+
+                <div class="hero-content">
+
+                    <div class="hero-label">
+                        Administration Portal
                     </div>
 
-                    <div class="admin-name">
-                        {{ auth()->user()->name ?? 'Administrator' }}
-                    </div>
+                    <h1 class="hero-title">
+                        Admin Dashboard
+                    </h1>
+
+                    <p class="hero-description">
+                        Monitor students, courses, and registered accounts
+                        from one central administration portal.
+                    </p>
+
                 </div>
 
-            </div>
 
-        </div>
+                <div class="hero-user">
+
+                    <div class="hero-user-label">
+                        Logged In As
+                    </div>
+
+                    <div class="hero-user-name">
+                        {{ auth()->user()->name }}
+                    </div>
+
+                    <div class="hero-user-role">
+                        Administrator
+                    </div>
+
+                </div>
+
+            </section>
 
 
-        {{-- Statistics --}}
-        <div class="stats-grid">
+            <!-- =========================
+                 STATISTICS
+            ========================= -->
 
-            {{-- Students --}}
-            <div class="stat-card">
+            <div class="stats-grid">
 
-                <div class="stat-top">
+
+                <!-- STUDENTS -->
+
+                <div class="stat-card">
+
+                    <div class="stat-icon student-icon">
+                        👥
+                    </div>
 
                     <div>
+
                         <div class="stat-label">
                             Total Students
                         </div>
 
-                        <div class="stat-number">
+                        <div class="stat-value">
                             {{ \App\Models\Student::count() }}
                         </div>
-                    </div>
 
-                    <div class="stat-icon icon-dark">
-                        <svg width="21" height="21" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="1.8"
-                                  d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/>
-                            <circle cx="9" cy="7" r="4" stroke-width="1.8"/>
-                            <path stroke-linecap="round"
-                                  stroke-width="1.8"
-                                  d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
-                        </svg>
+                        <a
+                            href="{{ route('students.index') }}"
+                            class="stat-link"
+                        >
+                            View Students →
+                        </a>
+
                     </div>
 
                 </div>
 
-                <a href="{{ route('students.index') }}" class="stat-link">
-                    View student directory
-                    <span>→</span>
-                </a>
 
-            </div>
+                <!-- COURSES -->
 
+                <div class="stat-card">
 
-            {{-- Courses --}}
-            <div class="stat-card">
-
-                <div class="stat-top">
+                    <div class="stat-icon course-icon">
+                        🎓
+                    </div>
 
                     <div>
+
                         <div class="stat-label">
                             Total Courses
                         </div>
 
-                        <div class="stat-number">
+                        <div class="stat-value">
                             {{ \App\Models\Course::count() }}
                         </div>
-                    </div>
 
-                    <div class="stat-icon icon-blue">
-                        <svg width="21" height="21" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="1.8"
-                                  d="M12 3L2 8l10 5 10-5-10-5z"/>
-                            <path stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="1.8"
-                                  d="M6 10.5V16c3.5 3 8.5 3 12 0v-5.5"/>
-                        </svg>
+                        <a
+                            href="{{ route('courses.index') }}"
+                            class="stat-link"
+                        >
+                            View Courses →
+                        </a>
+
                     </div>
 
                 </div>
 
-                <a href="{{ route('courses.index') }}" class="stat-link">
-                    View course directory
-                    <span>→</span>
-                </a>
 
-            </div>
+                <!-- USERS -->
 
+                <div class="stat-card">
 
-            {{-- Users --}}
-            <div class="stat-card">
-
-                <div class="stat-top">
+                    <div class="stat-icon user-icon">
+                        👤
+                    </div>
 
                     <div>
+
                         <div class="stat-label">
-                            Registered Users
+                            Total Users
                         </div>
 
-                        <div class="stat-number">
+                        <div class="stat-value">
                             {{ \App\Models\User::count() }}
                         </div>
-                    </div>
 
-                    <div class="stat-icon icon-green">
-                        <svg width="21" height="21" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <circle cx="12" cy="8" r="4" stroke-width="1.8"/>
-                            <path stroke-linecap="round"
-                                  stroke-width="1.8"
-                                  d="M4 21a8 8 0 0116 0"/>
-                        </svg>
+                        <a
+                            href="{{ route('users.index') }}"
+                            class="stat-link"
+                        >
+                            Manage Users →
+                        </a>
+
                     </div>
 
                 </div>
-
-                <span class="stat-link">
-                    Active administration accounts
-                </span>
 
             </div>
 
-        </div>
 
+            <!-- =========================
+                 WELCOME
+            ========================= -->
 
-        {{-- Main Content --}}
-        <div class="main-grid">
-
-            {{-- Welcome --}}
             <section class="welcome-card">
 
-                <div class="welcome-content">
-
-                    <div class="welcome-tag">
-                        <span>●</span>
-                        Administrator Access
-                    </div>
-
-                    <h2>
-                        Welcome back, {{ auth()->user()->name ?? 'Administrator' }}.
-                    </h2>
-
-                    <p>
-                        Manage your student records, profiles and courses
-                        from one centralized administration portal.
-                    </p>
-
-                    <div class="welcome-actions">
-
-                        <a href="{{ route('students.index') }}"
-                           class="primary-action">
-                            Manage Students
-                            <span style="margin-left:8px;">→</span>
-                        </a>
-
-                        <a href="{{ route('students.create') }}"
-                           class="secondary-action">
-                            + Add Student
-                        </a>
-
-                    </div>
-
+                <div class="welcome-label">
+                    Administration
                 </div>
 
-            </section>
+                <h2 class="welcome-title">
+                    Welcome, {{ auth()->user()->name }}!
+                </h2>
 
-
-            {{-- Quick Actions --}}
-            <section class="quick-card">
-
-                <h3>
-                    Quick Actions
-                </h3>
-
-                <p class="quick-card-description">
-                    Frequently used administration tools.
+                <p class="welcome-text">
+                    You are logged in as an administrator. Use the
+                    management tools below to maintain student records,
+                    manage academic courses, and control registered users.
                 </p>
 
 
-                <a href="{{ route('students.index') }}" class="quick-item">
+                <div class="action-buttons">
 
-                    <div class="quick-icon">
-                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="1.8"
-                                  d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/>
-                            <circle cx="9" cy="7" r="4" stroke-width="1.8"/>
-                        </svg>
-                    </div>
+                    <a
+                        href="{{ route('students.index') }}"
+                        class="primary-button"
+                    >
+                        Manage Students
+                    </a>
 
-                    <div class="quick-text">
-                        <div class="quick-title">
-                            Student Directory
-                        </div>
+                    <a
+                        href="{{ route('courses.index') }}"
+                        class="secondary-button"
+                    >
+                        Manage Courses
+                    </a>
 
-                        <div class="quick-subtitle">
-                            Search and manage students
-                        </div>
-                    </div>
+                    <a
+                        href="{{ route('users.index') }}"
+                        class="admin-button"
+                    >
+                        Manage Users
+                    </a>
 
-                    <div class="quick-arrow">
-                        →
-                    </div>
-
-                </a>
-
-
-                <a href="{{ route('students.create') }}" class="quick-item">
-
-                    <div class="quick-icon">
-                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="1.8"
-                                  d="M12 5v14M5 12h14"/>
-                        </svg>
-                    </div>
-
-                    <div class="quick-text">
-                        <div class="quick-title">
-                            Add Student
-                        </div>
-
-                        <div class="quick-subtitle">
-                            Create a new student record
-                        </div>
-                    </div>
-
-                    <div class="quick-arrow">
-                        →
-                    </div>
-
-                </a>
-
-
-                <a href="{{ route('courses.index') }}" class="quick-item">
-
-                    <div class="quick-icon">
-                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="1.8"
-                                  d="M12 3L2 8l10 5 10-5-10-5z"/>
-                            <path stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="1.8"
-                                  d="M6 10.5V16c3.5 3 8.5 3 12 0v-5.5"/>
-                        </svg>
-                    </div>
-
-                    <div class="quick-text">
-                        <div class="quick-title">
-                            Course Management
-                        </div>
-
-                        <div class="quick-subtitle">
-                            View available courses
-                        </div>
-                    </div>
-
-                    <div class="quick-arrow">
-                        →
-                    </div>
-
-                </a>
+                </div>
 
             </section>
 
-        </div>
+
+            <!-- =========================
+                 QUICK ACCESS
+            ========================= -->
+
+            <h2 class="section-title">
+                Quick Access
+            </h2>
 
 
-        {{-- System Status --}}
-        <div class="system-card">
+            <div class="quick-grid">
 
-            <div>
-                <div class="system-title">
-                    Student Management System
-                </div>
 
-                <div class="system-text">
-                    Administration portal is ready for use.
-                </div>
-            </div>
+                <!-- STUDENT MANAGEMENT -->
 
-            <div class="status">
-                <span class="status-dot"></span>
-                System Online
+                <a
+                    href="{{ route('students.index') }}"
+                    class="quick-card"
+                >
+
+                    <div class="quick-left">
+
+                        <div class="quick-icon quick-student-icon">
+                            👨‍🎓
+                        </div>
+
+                        <div>
+
+                            <div class="quick-title">
+                                Student Directory
+                            </div>
+
+                            <div class="quick-description">
+                                View, search, edit and manage student records
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="quick-arrow">
+                        →
+                    </div>
+
+                </a>
+
+
+                <!-- COURSE MANAGEMENT -->
+
+                <a
+                    href="{{ route('courses.index') }}"
+                    class="quick-card"
+                >
+
+                    <div class="quick-left">
+
+                        <div class="quick-icon quick-course-icon">
+                            🎓
+                        </div>
+
+                        <div>
+
+                            <div class="quick-title">
+                                Course Management
+                            </div>
+
+                            <div class="quick-description">
+                                Create, edit and manage academic courses
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="quick-arrow">
+                        →
+                    </div>
+
+                </a>
+
+
+                <!-- USER MANAGEMENT -->
+
+                <a
+                    href="{{ route('users.index') }}"
+                    class="quick-card"
+                >
+
+                    <div class="quick-left">
+
+                        <div class="quick-icon quick-user-icon">
+                            👤
+                        </div>
+
+                        <div>
+
+                            <div class="quick-title">
+                                User Management
+                            </div>
+
+                            <div class="quick-description">
+                                Manage registered accounts and user roles
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="quick-arrow">
+                        →
+                    </div>
+
+                </a>
+
+
             </div>
 
         </div>
 
     </div>
-
-</div>
-
 
 </x-app-layout>

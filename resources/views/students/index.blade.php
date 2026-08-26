@@ -1,4 +1,3 @@
-```blade
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Course Management</title>
+    <title>Student Management</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -108,7 +107,7 @@
         }
 
         /* =========================
-           PAGE
+           MAIN CONTAINER
         ========================= */
 
         .container {
@@ -172,7 +171,7 @@
             margin: 9px 0 0;
             color: #cbd5e1;
             font-size: 13px;
-            max-width: 550px;
+            max-width: 600px;
             line-height: 1.6;
         }
 
@@ -182,8 +181,8 @@
             min-width: 170px;
             padding: 20px;
             border-radius: 16px;
-            background: rgba(255,255,255,.08);
-            border: 1px solid rgba(255,255,255,.1);
+            background: rgba(255, 255, 255, .08);
+            border: 1px solid rgba(255, 255, 255, .1);
         }
 
         .hero-stat-label {
@@ -198,242 +197,331 @@
         }
 
         /* =========================
-           QUICK STATS
+           ACTION BAR
         ========================= */
 
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-            margin-bottom: 32px;
-        }
-
-        .stat {
-            background: white;
-            border-radius: 16px;
-            padding: 21px;
-            border: 1px solid #e1e5ec;
+        .action-bar {
             display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .stat-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 13px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
-        }
-
-        .purple {
-            background: #ede9fe;
-        }
-
-        .green {
-            background: #dcfce7;
-        }
-
-        .orange {
-            background: #ffedd5;
-        }
-
-        .stat-label {
-            color: #7b8495;
-            font-size: 11px;
-            font-weight: 600;
-        }
-
-        .stat-value {
-            font-size: 22px;
-            font-weight: 850;
-            margin-top: 3px;
-        }
-
-        /* =========================
-           SECTION
-        ========================= */
-
-        .section-top {
-            display: flex;
-            align-items: center;
             justify-content: space-between;
-            margin-bottom: 18px;
-        }
-
-        .section-top h2 {
-            margin: 0;
-            font-size: 19px;
-            font-weight: 850;
-        }
-
-        .section-top span {
-            color: #8a93a5;
-            font-size: 12px;
-        }
-
-        /* =========================
-           COURSES
-        ========================= */
-
-        .courses {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            align-items: center;
             gap: 20px;
+            margin-bottom: 22px;
         }
 
-        .course {
-            background: white;
-            border-radius: 18px;
-            overflow: hidden;
-            border: 1px solid #e1e5ec;
-            transition: .25s ease;
-        }
-
-        .course:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 18px 35px rgba(15,23,42,.1);
-        }
-
-        .course-top {
-            height: 125px;
-            padding: 20px;
-            position: relative;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-        }
-
-        .course:nth-child(3n+1) .course-top {
-            background: linear-gradient(135deg, #6366f1, #8b5cf6);
-        }
-
-        .course:nth-child(3n+2) .course-top {
-            background: linear-gradient(135deg, #0891b2, #2563eb);
-        }
-
-        .course:nth-child(3n+3) .course-top {
-            background: linear-gradient(135deg, #059669, #0d9488);
-        }
-
-        .course-number {
-            color: rgba(255,255,255,.8);
-            font-size: 10px;
-            font-weight: 800;
-            letter-spacing: 1px;
-        }
-
-        .course-symbol {
-            width: 52px;
-            height: 52px;
-            background: rgba(255,255,255,.18);
-            backdrop-filter: blur(5px);
-            border: 1px solid rgba(255,255,255,.25);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 23px;
-        }
-
-        .course-body {
-            padding: 21px;
-        }
-
-        .course-title {
+        .page-title h2 {
             margin: 0;
-            font-size: 17px;
-            font-weight: 800;
-            color: #182033;
-        }
-
-        .course-description {
-            color: #7b8495;
-            font-size: 12px;
-            line-height: 1.6;
-            min-height: 40px;
-            margin: 8px 0 20px;
-        }
-
-        .enrollment-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-
-        .enrollment-label {
-            color: #6b7280;
-            font-size: 11px;
-            font-weight: 650;
-        }
-
-        .enrollment-number {
-            color: #182033;
-            font-size: 13px;
+            font-size: 20px;
             font-weight: 850;
         }
 
-        .progress {
-            width: 100%;
-            height: 7px;
-            background: #edf0f5;
-            border-radius: 20px;
-            overflow: hidden;
+        .page-title p {
+            margin: 5px 0 0;
+            color: #7b8495;
+            font-size: 12px;
         }
 
-        .progress-bar {
-            height: 100%;
-            border-radius: 20px;
-        }
-
-        .course:nth-child(3n+1) .progress-bar {
+        .add-button {
             background: #6366f1;
-        }
-
-        .course:nth-child(3n+2) .progress-bar {
-            background: #0891b2;
-        }
-
-        .course:nth-child(3n+3) .progress-bar {
-            background: #059669;
-        }
-
-        .course-bottom {
-            margin-top: 18px;
-            padding-top: 15px;
-            border-top: 1px solid #edf0f4;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .active {
-            color: #15803d;
-            background: #dcfce7;
-            padding: 5px 9px;
-            border-radius: 6px;
-            font-size: 10px;
+            color: white;
+            text-decoration: none;
+            padding: 12px 18px;
+            border-radius: 10px;
+            font-size: 12px;
             font-weight: 800;
+            transition: .2s ease;
+            white-space: nowrap;
         }
 
-        .course-code {
-            color: #9aa2b1;
-            font-size: 10px;
+        .add-button:hover {
+            background: #4f46e5;
+            transform: translateY(-1px);
+        }
+
+        /* =========================
+           SEARCH / FILTER
+        ========================= */
+
+        .filter-box {
+            background: white;
+            border: 1px solid #e1e5ec;
+            border-radius: 16px;
+            padding: 18px;
+            margin-bottom: 24px;
+        }
+
+        .filter-form {
+            display: grid;
+            grid-template-columns: 1fr 230px auto;
+            gap: 12px;
+            align-items: end;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .field label {
+            color: #596273;
+            font-size: 11px;
+            font-weight: 750;
+        }
+
+        .field input,
+        .field select {
+            width: 100%;
+            height: 43px;
+            border: 1px solid #dce1e9;
+            border-radius: 9px;
+            padding: 0 12px;
+            font-size: 12px;
+            color: #182033;
+            background: white;
+            outline: none;
+        }
+
+        .field input:focus,
+        .field select:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, .1);
+        }
+
+        .filter-button {
+            height: 43px;
+            padding: 0 20px;
+            border: none;
+            border-radius: 9px;
+            background: #111827;
+            color: white;
+            font-size: 12px;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        .filter-button:hover {
+            background: #1f2937;
+        }
+
+        .clear-link {
+            display: inline-flex;
+            align-items: center;
+            height: 43px;
+            padding: 0 15px;
+            border-radius: 9px;
+            color: #6b7280;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .clear-link:hover {
+            color: #111827;
+            background: #f3f4f6;
+        }
+
+        /* =========================
+           SUCCESS MESSAGE
+        ========================= */
+
+        .success-message {
+            background: #dcfce7;
+            border: 1px solid #bbf7d0;
+            color: #166534;
+            border-radius: 12px;
+            padding: 13px 16px;
+            margin-bottom: 20px;
+            font-size: 12px;
             font-weight: 700;
         }
 
         /* =========================
-           EMPTY
+           STUDENT TABLE
         ========================= */
 
-        .empty {
+        .table-card {
             background: white;
             border: 1px solid #e1e5ec;
             border-radius: 18px;
+            overflow: hidden;
+        }
+
+        .table-header {
+            padding: 18px 20px;
+            border-bottom: 1px solid #edf0f4;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .table-header h3 {
+            margin: 0;
+            font-size: 15px;
+            font-weight: 850;
+        }
+
+        .student-count {
+            color: #8a93a5;
+            font-size: 11px;
+            font-weight: 650;
+        }
+
+        .table-wrapper {
+            width: 100%;
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 800px;
+        }
+
+        thead {
+            background: #f8f9fc;
+        }
+
+        th {
+            text-align: left;
+            padding: 13px 18px;
+            color: #7b8495;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: .7px;
+            font-weight: 800;
+            border-bottom: 1px solid #edf0f4;
+        }
+
+        td {
+            padding: 15px 18px;
+            border-bottom: 1px solid #edf0f4;
+            font-size: 12px;
+            vertical-align: middle;
+        }
+
+        tbody tr {
+            transition: .15s ease;
+        }
+
+        tbody tr:hover {
+            background: #fafbff;
+        }
+
+        tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .student-info {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+        }
+
+        .student-image {
+            width: 42px;
+            height: 42px;
+            border-radius: 11px;
+            object-fit: cover;
+            border: 1px solid #e5e7eb;
+        }
+
+        .student-placeholder {
+            width: 42px;
+            height: 42px;
+            border-radius: 11px;
+            background: #ede9fe;
+            color: #6366f1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 850;
+        }
+
+        .student-name {
+            font-weight: 800;
+            color: #182033;
+        }
+
+        .student-id {
+            color: #9aa2b1;
+            font-size: 10px;
+            margin-top: 3px;
+        }
+
+        .email {
+            color: #596273;
+        }
+
+        .phone {
+            color: #596273;
+        }
+
+        .course-badge {
+            display: inline-block;
+            padding: 6px 9px;
+            border-radius: 7px;
+            background: #ede9fe;
+            color: #5b21b6;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        /* =========================
+           ACTIONS
+        ========================= */
+
+        .actions {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .action-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 7px 10px;
+            border-radius: 7px;
+            text-decoration: none;
+            font-size: 10px;
+            font-weight: 800;
+        }
+
+        .view-button {
+            background: #eef2ff;
+            color: #4f46e5;
+        }
+
+        .view-button:hover {
+            background: #e0e7ff;
+        }
+
+        .edit-button {
+            background: #ecfeff;
+            color: #0e7490;
+        }
+
+        .edit-button:hover {
+            background: #cffafe;
+        }
+
+        .delete-button {
+            background: #fef2f2;
+            color: #dc2626;
+            border: none;
+            cursor: pointer;
+        }
+
+        .delete-button:hover {
+            background: #fee2e2;
+        }
+
+        /* =========================
+           EMPTY STATE
+        ========================= */
+
+        .empty {
             text-align: center;
             padding: 75px 20px;
         }
@@ -451,23 +539,33 @@
         .empty p {
             color: #8a93a5;
             font-size: 13px;
+            margin: 8px 0 20px;
+        }
+
+        /* =========================
+           PAGINATION
+        ========================= */
+
+        .pagination {
+            padding: 18px 20px;
+            border-top: 1px solid #edf0f4;
+        }
+
+        .pagination nav {
+            display: flex;
+            justify-content: center;
+        }
+
+        .pagination svg {
+            width: 16px;
+            height: 16px;
         }
 
         /* =========================
            RESPONSIVE
         ========================= */
 
-        @media (max-width: 950px) {
-            .courses {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .hero {
-                align-items: flex-start;
-            }
-        }
-
-        @media (max-width: 700px) {
+        @media (max-width: 800px) {
 
             .nav {
                 padding: 0 18px;
@@ -485,6 +583,7 @@
             .hero {
                 padding: 28px;
                 flex-direction: column;
+                align-items: flex-start;
             }
 
             .hero h1 {
@@ -495,12 +594,24 @@
                 width: 100%;
             }
 
-            .stats {
+            .action-bar {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .add-button {
+                width: 100%;
+                text-align: center;
+            }
+
+            .filter-form {
                 grid-template-columns: 1fr;
             }
 
-            .courses {
-                grid-template-columns: 1fr;
+            .filter-button,
+            .clear-link {
+                width: 100%;
+                justify-content: center;
             }
         }
     </style>
@@ -532,7 +643,6 @@
 
     </div>
 
-
     <div class="nav-right">
 
         @auth
@@ -543,6 +653,10 @@
 
             <a href="{{ route('students.index') }}" class="nav-link">
                 Students
+            </a>
+
+            <a href="{{ route('courses.index') }}" class="nav-link">
+                Courses
             </a>
 
             <div class="user">
@@ -566,7 +680,9 @@
 
 <main class="container">
 
-    <!-- HERO -->
+    <!-- =========================
+         HERO
+    ========================= -->
 
     <section class="hero">
 
@@ -577,25 +693,24 @@
             </div>
 
             <h1>
-                Course Management
+                Student Management
             </h1>
 
             <p>
-                Manage your academic courses and monitor how many
-                students are enrolled in each program.
+                Manage student records, view profiles, assign courses,
+                and keep your academic information organized.
             </p>
 
         </div>
 
-
         <div class="hero-stat">
 
             <div class="hero-stat-label">
-                AVAILABLE COURSES
+                TOTAL STUDENTS
             </div>
 
             <div class="hero-stat-number">
-                {{ $courses->count() }}
+                {{ $students->total() }}
             </div>
 
         </div>
@@ -603,224 +718,381 @@
     </section>
 
 
-    <!-- QUICK STATS -->
+    <!-- =========================
+         SUCCESS MESSAGE
+    ========================= -->
 
-    @php
-        $totalStudents = $courses->sum(function ($course) {
-            return $course->students->count();
-        });
+    @if (session('success'))
 
-        $largestCourse = $courses->sortByDesc(function ($course) {
-            return $course->students->count();
-        })->first();
-
-        $largestEnrollment = $largestCourse
-            ? $largestCourse->students->count()
-            : 0;
-    @endphp
-
-
-    <div class="stats">
-
-        <div class="stat">
-
-            <div class="stat-icon purple">
-                🎓
-            </div>
-
-            <div>
-
-                <div class="stat-label">
-                    TOTAL COURSES
-                </div>
-
-                <div class="stat-value">
-                    {{ $courses->count() }}
-                </div>
-
-            </div>
-
+        <div class="success-message">
+            {{ session('success') }}
         </div>
 
+    @endif
 
-        <div class="stat">
 
-            <div class="stat-icon green">
-                👥
-            </div>
+    <!-- =========================
+         ACTION BAR
+    ========================= -->
 
-            <div>
+    <div class="action-bar">
 
-                <div class="stat-label">
-                    TOTAL ENROLLMENTS
-                </div>
+        <div class="page-title">
 
-                <div class="stat-value">
-                    {{ $totalStudents }}
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="stat">
-
-            <div class="stat-icon orange">
-                ⭐
-            </div>
-
-            <div>
-
-                <div class="stat-label">
-                    LARGEST COURSE
-                </div>
-
-                <div class="stat-value">
-                    {{ $largestEnrollment }}
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- COURSE SECTION -->
-
-    <div class="section-top">
-
-        <h2>
-            Available Courses
-        </h2>
-
-        <span>
-            {{ $courses->count() }}
-            total
-        </span>
-
-    </div>
-
-
-    @if ($courses->count())
-
-        <div class="courses">
-
-            @foreach ($courses as $course)
-
-                @php
-                    $enrollment = $course->students->count();
-
-                    $maxEnrollment = 50;
-
-                    $percentage = min(
-                        100,
-                        ($enrollment / $maxEnrollment) * 100
-                    );
-                @endphp
-
-
-                <article class="course">
-
-                    <!-- COLOR HEADER -->
-
-                    <div class="course-top">
-
-                        <div class="course-number">
-                            COURSE {{ str_pad($course->id, 2, '0', STR_PAD_LEFT) }}
-                        </div>
-
-                        <div class="course-symbol">
-                            🎓
-                        </div>
-
-                    </div>
-
-
-                    <!-- BODY -->
-
-                    <div class="course-body">
-
-                        <h3 class="course-title">
-                            {{ $course->name }}
-                        </h3>
-
-
-                        <p class="course-description">
-
-                            {{ $course->description
-                                ?? 'Academic program available for student enrollment and management.' }}
-
-                        </p>
-
-
-                        <div class="enrollment-row">
-
-                            <span class="enrollment-label">
-                                Student Enrollment
-                            </span>
-
-                            <span class="enrollment-number">
-                                {{ $enrollment }}
-                            </span>
-
-                        </div>
-
-
-                        <div class="progress">
-
-                            <div
-                                class="progress-bar"
-                                style="width: {{ $percentage }}%;">
-                            </div>
-
-                        </div>
-
-
-                        <div class="course-bottom">
-
-                            <span class="active">
-                                ● ACTIVE
-                            </span>
-
-                            <span class="course-code">
-                                ID #{{ $course->id }}
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-            @endforeach
-
-        </div>
-
-    @else
-
-        <div class="empty">
-
-            <div class="empty-icon">
-                🎓
-            </div>
-
-            <h3>
-                No Courses Available
-            </h3>
+            <h2>
+                All Students
+            </h2>
 
             <p>
-                There are currently no courses registered in the system.
+                View and manage registered student records.
             </p>
 
         </div>
 
-    @endif
+        <a href="{{ route('students.create') }}" class="add-button">
+            + Add New Student
+        </a>
+
+    </div>
+
+
+    <!-- =========================
+         SEARCH / FILTER
+    ========================= -->
+
+    <div class="filter-box">
+
+        <form method="GET" action="{{ route('students.index') }}" class="filter-form">
+
+            <div class="field">
+
+                <label for="search">
+                    Search Student
+                </label>
+
+                <input
+                    type="text"
+                    id="search"
+                    name="search"
+                    value="{{ request('search') }}"
+                    placeholder="Search by name or email..."
+                >
+
+            </div>
+
+
+            <div class="field">
+
+                <label for="course_id">
+                    Filter by Course
+                </label>
+
+                <select name="course_id" id="course_id">
+
+                    <option value="">
+                        All Courses
+                    </option>
+
+                    @foreach ($courses as $course)
+
+                        <option
+                            value="{{ $course->id }}"
+                            {{ request('course_id') == $course->id ? 'selected' : '' }}
+                        >
+                            {{ $course->name }}
+                        </option>
+
+                    @endforeach
+
+                </select>
+
+            </div>
+
+
+            <div>
+
+                <button type="submit" class="filter-button">
+                    Search
+                </button>
+
+                @if (request('search') || request('course_id'))
+
+                    <a
+                        href="{{ route('students.index') }}"
+                        class="clear-link"
+                    >
+                        Clear
+                    </a>
+
+                @endif
+
+            </div>
+
+        </form>
+
+    </div>
+
+
+    <!-- =========================
+         STUDENTS TABLE
+    ========================= -->
+
+    <div class="table-card">
+
+        <div class="table-header">
+
+            <h3>
+                Registered Students
+            </h3>
+
+            <span class="student-count">
+                {{ $students->total() }} student{{ $students->total() == 1 ? '' : 's' }}
+            </span>
+
+        </div>
+
+
+        @if ($students->count())
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Student
+                            </th>
+
+                            <th>
+                                Email
+                            </th>
+
+                            <th>
+                                Phone
+                            </th>
+
+                            <th>
+                                Course
+                            </th>
+
+                            <th>
+                                Actions
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody>
+
+                        @foreach ($students as $student)
+
+                            <tr>
+
+                                <!-- STUDENT -->
+
+                                <td>
+
+                                    <div class="student-info">
+
+                                        @if ($student->image)
+
+                                            <img
+                                                src="{{ asset('storage/' . $student->image) }}"
+                                                alt="{{ $student->name }}"
+                                                class="student-image"
+                                            >
+
+                                        @else
+
+                                            <div class="student-placeholder">
+
+                                                {{ strtoupper(substr($student->name, 0, 2)) }}
+
+                                            </div>
+
+                                        @endif
+
+
+                                        <div>
+
+                                            <div class="student-name">
+                                                {{ $student->name }}
+                                            </div>
+
+                                            <div class="student-id">
+                                                Student ID #{{ $student->id }}
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+                                </td>
+
+
+                                <!-- EMAIL -->
+
+                                <td>
+
+                                    <span class="email">
+                                        {{ $student->email }}
+                                    </span>
+
+                                </td>
+
+
+                                <!-- PHONE -->
+
+                                <td>
+
+                                    <span class="phone">
+                                        {{ $student->phone }}
+                                    </span>
+
+                                </td>
+
+
+                                <!-- COURSE -->
+
+                                <td>
+
+                                    @if ($student->course)
+
+                                        <span class="course-badge">
+                                            {{ $student->course->name }}
+                                        </span>
+
+                                    @else
+
+                                        <span class="course-badge">
+                                            No Course
+                                        </span>
+
+                                    @endif
+
+                                </td>
+
+
+                                <!-- ACTIONS -->
+
+                                <td>
+
+                                    <div class="actions">
+
+                                        <a
+                                            href="{{ route('students.show', $student) }}"
+                                            class="action-link view-button"
+                                        >
+                                            View
+                                        </a>
+
+
+                                        <a
+                                            href="{{ route('students.edit', $student) }}"
+                                            class="action-link edit-button"
+                                        >
+                                            Edit
+                                        </a>
+
+
+                                        <form
+                                            action="{{ route('students.destroy', $student) }}"
+                                            method="POST"
+                                            onsubmit="return confirm('Are you sure you want to delete this student?');"
+                                            style="display:inline;"
+                                        >
+
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button
+                                                type="submit"
+                                                class="action-link delete-button"
+                                            >
+                                                Delete
+                                            </button>
+
+                                        </form>
+
+                                    </div>
+
+                                </td>
+
+                            </tr>
+
+                        @endforeach
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- PAGINATION -->
+
+            <div class="pagination">
+
+                {{ $students->links() }}
+
+            </div>
+
+
+        @else
+
+            <!-- EMPTY STATE -->
+
+            <div class="empty">
+
+                <div class="empty-icon">
+                    👨‍🎓
+                </div>
+
+                <h3>
+                    No Students Found
+                </h3>
+
+                @if (request('search') || request('course_id'))
+
+                    <p>
+                        No students match your current search or course filter.
+                    </p>
+
+                    <a
+                        href="{{ route('students.index') }}"
+                        class="add-button"
+                    >
+                        Clear Filters
+                    </a>
+
+                @else
+
+                    <p>
+                        There are currently no students registered in the system.
+                    </p>
+
+                    <a
+                        href="{{ route('students.create') }}"
+                        class="add-button"
+                    >
+                        + Add First Student
+                    </a>
+
+                @endif
+
+            </div>
+
+        @endif
+
+    </div>
 
 </main>
 
 </body>
 
 </html>
-```
